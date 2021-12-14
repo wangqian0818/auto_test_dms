@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>测试报告</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (展开详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (隐藏详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+/*
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);*/
+function add_collapse() {  // modify by linux超
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">显示详情</a> / ' +
+                            '<a href="javascript:hide_all_extras()">隐藏详情</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+	// 修改用例报告显示的用例名称 add by linux超
+	var case_name_td = document.getElementsByClassName("col-name");
+		for(var i = 0; i < case_name_td.length; i++)
+			try{
+				case_name_td[i].innerText = case_name_td[i].innerText.split("\[")[1].split("\]")[0];
+			}
+			catch(err){
+				// 如果表格中没有[]会抛异常，如果抛异常我就显示null，如果你想显示别的东西自己改吧，因为通常只要我们使用参数化就有[]显示
+				case_name_td[i].innerText = "测试用例无参数化数据null";
+			}
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>[ftp_check_cmd]-[10.10.101.47]-[20211124_18-23-38].html</h1>
+    <p>生成报告时间24-Nov-2021 18:24:02 Pytest-Html版本：<a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.22.1.dev11+g4f729c1</p>
+    <h2>测试环境</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.5.0&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;0.13.1&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;allure-pytest&apos;: &apos;2.8.6&apos;, &apos;assume&apos;: &apos;2.4.2&apos;, &apos;base-url&apos;: &apos;1.4.2&apos;, &apos;cov&apos;: &apos;2.10.1&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;instafail&apos;: &apos;0.4.2&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;reportlog&apos;: &apos;0.1.2&apos;, &apos;rerunfailures&apos;: &apos;9.1.1&apos;, &apos;sugar&apos;: &apos;0.9.4&apos;, &apos;xdist&apos;: &apos;2.2.0&apos;, &apos;html&apos;: &apos;1.22.1.dev11+g4f729c1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.6</td></tr>
+      <tr>
+        <td>用例执行时间</td>
+        <td>2021-11-24 18:23:39</td></tr>
+      <tr>
+        <td>设备IP</td>
+        <td>10.10.101.47</td></tr></table>
+    <h2>用例统计</h2>
+    <p>所属部门: 卓讯-合肥测试部</p>
+    <p>测试人员: 王谦</p>
+    <p>【 -------------------------- 网关设备版本号 ----------------------------- 】</p>
+    <p>【 agentjsac-1.1.903-rc.x86_64 】</p>
+    <p>【 driverjsac-1.1.897-rc.x86_64 】</p>
+    <p>【 libhostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 tsthostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 nginx-0.0.472-kernel_rc.x86_64 】</p>
+    <p>执行了2个测试用例, 历时:22.87秒 . </p>
+    <p class="filter" hidden="true">(取消)勾选复选框, 以便筛选测试结果</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">0 通过</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 跳过</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">2 失败</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 错误</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 预期失败</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 预期通过</span>, <input checked="true" class="filter" data-test-result="重跑" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="重跑">0 重跑</span>
+    <h2>测试结果</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">通过/失败</th>
+          <th class="sortable time" col="time">Time</th>
+          <th>Test_nodeId</th>
+          <th class="sortable numeric" col="duration">耗时</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">无测试结果, 试着选择其他测试结果条件</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-time">2021-11-24 10:23:50.735838</td>
+          <td>Case_rbm/ftp_check_cmd/function.py::Test_ftp_check_delete::test_ftp_check_delete_a1</td>
+          <td class="col-duration">11.09</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;ftp_check_cmd.function.Test_ftp_check_delete object at 0x00000243A2B7DC18&gt;<br/><br/>    @allure.feature(&#x27;验证无上传、下载、删除的FTP传输策略&#x27;)<br/>    def test_ftp_check_delete_a1(self):<br/>        # 下发配置<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;addftp&#x27;), rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res1 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res1 == 1<br/>        # 检查代理策略是否下发成功<br/>        fun.check_proxy_policy(dut=&#x27;gw&#x27;, type=&#x27;ftp&#x27;)<br/>    <br/>        log.warning(&#x27;self.host, self.port, self.username, self.password:&#x27;, self.host, self.port, self.username,<br/>                    self.password)<br/>        cmd = &quot;ABOR;ACCT;ADAT;ALLO;APPE;AUTH;CCC;CDUP;CONF;CWD;ENC;EPRT;EPSV;FEAT;HELP;LANG;LIST;LPRT;LPSV;MDTM;MIC;&quot; \<br/>              &quot;MKD;MLSD;MLST;MODE;NLST;NOOP;OPTS;PASS;PASV;PBSZ;PORT;PROT;PWD;QUIT;REIN;REST;RMD;RNFR;RNTO;SITE;&quot; \<br/>              &quot;SIZE;SMNT;STAT;STOU;STRU;SYST;TYPE;USER;XCUP;XMKD;XPWD;XRCP;XRMD;XRSQ;XSEM;XSEN&quot;<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;ftpcheck&#x27;, cmd_data=cmd, check_action=self.action),<br/>                 rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res2 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res2 == 1<br/>    <br/>        log.warning(&#x27;检查ftp应用安全策略是否下发成功&#x27;)<br/>        re = fun.wait_data(type=4, dut=&#x27;gw&#x27;, context=ftp_ruleid)<br/>        log.warning(&#x27;预期包含内容：{}&#x27;.format(ftp_ruleid))<br/>        log.warning(&#x27;查询ftp.json命令返回值：\n{}&#x27;.format(re))<br/>        assert str(ftp_ruleid) in re<br/>    <br/>        log.warning(&#x27;1、普通用户登录ftp服务器&#x27;)<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        assert &#x27;220&#x27; in fp.getwelcome()<br/>    <br/>        log.warning(&#x27;2、普通用户登录ftp服务器，上传文件(上传命令被禁止)&#x27;)<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result1 = con_ftp.uploadFile(fp, self.upremotePath, self.uplocalPath)<br/>        log.warning(&#x27;ftp上传文件扩展名为{}，结果为:{}&#x27;.format(self.uplocalPath, result1))<br/>        assert result1 == 0<br/>    <br/>        log.warning(&#x27;3、登录ftp服务器，下载文件(下载命令被禁止)&#x27;)<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result2 = con_ftp.downFile(fp, self.downremotePath, self.downlocalPath)<br/>        log.warning(&#x27;ftp下载(下载命令被禁止)文件扩展名{}为白名单结果为:{}&#x27;.format(self.downremotePath, result2))<br/>        assert result2 == 0<br/>    <br/>        log.warning(&#x27;4、 登录ftp服务器，删除目录下的文件（删除命令被禁止）&#x27;)<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result3 = con_ftp.deleallFile(fp, delePath)<br/>        log.warning(&#x27;ftp删除(删除命令被禁止){}的结果为:{}&#x27;.format(delePath, result3))<br/>&gt;       assert result3 == 0<br/><span class="error">E       AssertionError</span><br/><br/>Case_rbm\ftp_check_cmd\function.py:118: AssertionError<br/>------------------------------ Captured log setup ------------------------------<br/>WARNING  common.ssh:ssh.py:49 ssh 连接开始
+WARNING  common.ssh:ssh.py:55 ssh连接主机：10.10.101.47  完成!
+WARNING  common.ssh:ssh.py:62 ssh服务器: 10.10.101.47连接成功------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:10 nginx: master process /usr/local/nginx/sbin/nginx
+root      80793  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80794  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80795  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80796  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80797  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80798  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80799  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80800  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80801  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80802  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80803  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80804  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80805  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80806  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80807  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80808  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80809  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80810  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80811  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80812  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80813  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80814  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80815  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80816  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80898  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      80906  80898  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:12 nginx: master process /usr/local/nginx/sbin/nginx
+root      80793  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80794  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80795  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80796  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80797  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80798  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80799  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80800  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80801  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80802  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80803  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80804  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80805  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80806  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80807  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80808  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80809  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80810  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80811  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80812  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80813  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80814  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80815  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80816  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80920  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      80928  80920  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2121      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2122      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2123      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:2121
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:2121
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-2121-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2121;
+	app_id 5;
+	proxy_pass 192.168.30.47-2121-ftp;
+	proxy_service ftp;
+}
+upstream 192.168.30.47-2122-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2122;
+	app_id 5;
+	proxy_pass 192.168.30.47-2122-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2123-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2123;
+	app_id 5;
+	proxy_pass 192.168.30.47-2123-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2124-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2124;
+	app_id 5;
+	proxy_pass 192.168.30.47-2124-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2125-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2125;
+	app_id 5;
+	proxy_pass 192.168.30.47-2125-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2126-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2126;
+	app_id 5;
+	proxy_pass 192.168.30.47-2126-ftp;
+	proxy_service ftp_data;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:12 nginx: master process /usr/local/nginx/sbin/nginx
+root      80793  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80794  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80795  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80796  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80797  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80798  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80799  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80800  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80801  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80802  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80803  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80804  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80805  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80806  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80807  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80808  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80809  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80810  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80811  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80812  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80813  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80814  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80815  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80816  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80958  76372  7 18:23 ?        00:00:00 [nginx]
+root      80959  79970  0 18:23 ?        00:00:00 systemctl reload nginx_kernel
+root      80960  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      80963      1  0 18:23 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      80969  80960  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:16 nginx: master process /usr/local/nginx/sbin/nginx
+root      80998  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80999  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81000  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81001  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81002  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81003  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81004  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81005  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81006  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81007  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81008  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81009  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81010  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81011  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81012  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81013  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81014  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81015  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81016  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81017  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81018  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81019  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81020  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81021  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81022  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81030  81022  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:88 检查ftp应用安全策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/ftp.json
+WARNING  common.rabbitmq:function.py:90 预期包含内容：106
+WARNING  common.rabbitmq:function.py:91 查询ftp.json命令返回值：
+[{
+    &quot;AppId&quot;:  5,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  106,
+        &quot;Action&quot;:  &quot;Allow&quot;,
+        &quot;Cmd&quot;:  [&quot;ABOR&quot;, &quot;ACCT&quot;, &quot;ADAT&quot;, &quot;ALLO&quot;, &quot;APPE&quot;, &quot;AUTH&quot;, &quot;CCC&quot;, &quot;CDUP&quot;, &quot;CONF&quot;, &quot;CWD&quot;, &quot;ENC&quot;, &quot;EPRT&quot;, &quot;EPSV&quot;, &quot;FEAT&quot;, &quot;HELP&quot;, &quot;LANG&quot;, &quot;LIST&quot;, &quot;LPRT&quot;, &quot;LPSV&quot;, &quot;MDTM&quot;, &quot;MIC&quot;, &quot;MKD&quot;, &quot;MLSD&quot;, &quot;MLST&quot;, &quot;MODE&quot;, &quot;NLST&quot;, &quot;NOOP&quot;, &quot;OPTS&quot;, &quot;PASS&quot;, &quot;PASV&quot;, &quot;PBSZ&quot;, &quot;PORT&quot;, &quot;PROT&quot;, &quot;PWD&quot;, &quot;QUIT&quot;, &quot;REIN&quot;, &quot;REST&quot;, &quot;RMD&quot;, &quot;RNFR&quot;, &quot;RNTO&quot;, &quot;SITE&quot;, &quot;SIZE&quot;, &quot;SMNT&quot;, &quot;STAT&quot;, &quot;STOU&quot;, &quot;STRU&quot;, &quot;SYST&quot;, &quot;TYPE&quot;, &quot;USER&quot;, &quot;XCUP&quot;, &quot;XMKD&quot;, &quot;XPWD&quot;, &quot;XRCP&quot;, &quot;XRMD&quot;, &quot;XRSQ&quot;, &quot;XSEM&quot;, &quot;XSEN&quot;]
+      }]
+  }]
+
+WARNING  common.rabbitmq:function.py:94 1、普通用户登录ftp服务器
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:96 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  common.rabbitmq:function.py:99 2、普通用户登录ftp服务器，上传文件(上传命令被禁止)
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:101 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir:/
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home/ftp
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home/ftp/ftp_auto
+WARNING  data_check.con_ftp:con_ftp.py:72 Error:
+WARNING  common.rabbitmq:function.py:103 ftp上传文件扩展名为C:\Users\admin\Desktop\work\1.txt，结果为:0
+WARNING  common.rabbitmq:function.py:106 3、登录ftp服务器，下载文件(下载命令被禁止)
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:108 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:154 Error:
+WARNING  common.rabbitmq:function.py:110 ftp下载(下载命令被禁止)文件扩展名/home/ftp/ftp_auto/456.txt为白名单结果为:0
+WARNING  common.rabbitmq:function.py:113 4、 登录ftp服务器，删除目录下的文件（删除命令被禁止）
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:115 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:189 当前所在位置:/home/ftp/ftp_auto/ftp_del
+WARNING  data_check.con_ftp:con_ftp.py:191 [&#x27;55&#x27;]
+WARNING  data_check.con_ftp:con_ftp.py:199 [&#x27;55&#x27;]
+WARNING  data_check.con_ftp:con_ftp.py:207 55是文件夹
+WARNING  data_check.con_ftp:con_ftp.py:210 []
+WARNING  common.rabbitmq:function.py:117 ftp删除(删除命令被禁止)/home/ftp/ftp_auto/ftp_del的结果为:None</div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-time">2021-11-24 10:24:02.118361</td>
+          <td>Case_rbm/ftp_check_cmd/function.py::Test_ftp_check_delete::test_ftp_check_delete_a2</td>
+          <td class="col-duration">11.36</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;ftp_check_cmd.function.Test_ftp_check_delete object at 0x00000243A2BEEF98&gt;<br/><br/>    @allure.feature(&#x27;验证无上传的FTP传输策略&#x27;)<br/>    def test_ftp_check_delete_a2(self):<br/>        # 下发配置<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;addftp&#x27;), rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res1 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res1 == 1<br/>        # 检查代理策略是否下发成功<br/>        fun.check_proxy_policy(dut=&#x27;gw&#x27;, type=&#x27;ftp&#x27;)<br/>    <br/>        cmd = &quot;ABOR;ACCT;ADAT;ALLO;APPE;AUTH;CCC;CDUP;CONF;CWD;DELE;ENC;EPRT;EPSV;FEAT;HELP;LANG;LIST;LPRT;LPSV;MDTM;&quot; \<br/>              &quot;MIC;MKD;MLSD;MLST;MODE;NLST;NOOP;OPTS;PASS;PASV;PBSZ;PORT;PROT;PWD;QUIT;REIN;REST;RETR;RMD;RNFR;RNTO;&quot; \<br/>              &quot;SITE;SIZE;SMNT;STAT;STOU;STRU;SYST;TYPE;USER;XCUP;XMKD;XPWD;XRCP;XRMD;XRSQ;XSEM;XSEN&quot;<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;ftpcheck&#x27;, cmd_data=cmd, check_action=self.action),<br/>                 rbmDomain,base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res2 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res2 == 1<br/>    <br/>        log.warning(&#x27;检查ftp应用安全策略是否下发成功&#x27;)<br/>        re = fun.wait_data(type=4, dut=&#x27;gw&#x27;, context=ftp_ruleid)<br/>        log.warning(&#x27;预期包含内容：{}&#x27;.format(ftp_ruleid))<br/>        log.warning(&#x27;查询ftp.json命令返回值：\n{}&#x27;.format(re))<br/>        assert str(ftp_ruleid) in re<br/>    <br/>        # 1、登录ftp服务器，用户为白名单用户<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        assert &#x27;220&#x27; in fp.getwelcome()<br/>    <br/>        # 2、登录ftp服务器，上传文件(上传命令被禁止)<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result1 = con_ftp.uploadFile(fp, self.upremotePath, self.uplocalPath)<br/>        log.warning(&#x27;ftp上传(上传命令被禁止)文件{}的结果为:{}&#x27;.format(self.uplocalPath, result1))<br/>        assert result1 == 0<br/>    <br/>        # 3、登录ftp服务器，下载文件（允许下载命令）<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result2 = con_ftp.downFile(fp, self.downremotePath, self.downlocalPath)<br/>        log.warning(&#x27;ftp下载（允许下载命令）文件{}的结果为:{}&#x27;.format(self.downremotePath, result2))<br/>        assert result2 == 1<br/>    <br/>        # 4、 登录ftp服务器，删除目录下的文件（允许删除命令）<br/>        fp = con_ftp.connect_ftp(self.host, self.port, self.username, self.password)<br/>        log.warning(&#x27;欢迎语是：{}&#x27;.format(fp.getwelcome()))<br/>        result3 = con_ftp.deleallFile(fp, delePath)<br/>        log.warning(&#x27;ftp删除（允许删除命令）文件{}的结果为:{}&#x27;.format(delePath, result3))<br/>&gt;       assert result3 == 1<br/><span class="error">E       AssertionError</span><br/><br/>Case_rbm\ftp_check_cmd\function.py:190: AssertionError<br/>------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:16 nginx: master process /usr/local/nginx/sbin/nginx
+root      80998  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80999  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81000  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81001  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81002  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81003  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81004  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81005  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81006  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81007  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81008  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81009  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81010  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81011  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81012  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81013  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81014  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81015  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81016  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81017  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81018  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81019  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81020  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81021  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81049  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81057  81049  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:18 nginx: master process /usr/local/nginx/sbin/nginx
+root      80998  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80999  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81000  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81001  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81002  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81003  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81004  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81005  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81006  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81007  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81008  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81009  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81010  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81011  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81012  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81013  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81014  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81015  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81016  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81017  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81018  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81019  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81020  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81021  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81065  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81066  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81067  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81068  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81069  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81070  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81071  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81072  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81073  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81074  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81075  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81076  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81077  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81078  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81079  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81080  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81081  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81082  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81085  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81091  81082  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有42个进程启动成功
+WARNING  common.fun:fun.py:328 这是进程的第2次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:18 nginx: master process /usr/local/nginx/sbin/nginx
+root      80998  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      80999  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81000  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81001  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81002  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81003  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81004  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81005  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81006  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81007  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81008  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81009  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81010  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81011  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81012  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81013  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81014  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81015  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81016  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81017  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81018  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81019  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81020  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81021  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81065  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81066  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81067  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81068  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81069  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81070  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81071  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81072  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81073  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81074  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81075  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81076  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81077  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81078  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81079  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81080  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81081  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81085  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81092  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81093  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81094  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81095  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81096  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81097  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81105  81096  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有47个进程启动成功
+WARNING  common.fun:fun.py:328 这是进程的第3次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:18 nginx: master process /usr/local/nginx/sbin/nginx
+root      80998  76372  1 18:23 ?        00:00:00 [nginx]
+root      80999  76372  1 18:23 ?        00:00:00 [nginx]
+root      81000  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81001  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81002  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81003  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81004  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81005  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81006  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81007  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81008  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81009  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81010  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81011  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81012  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81013  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81014  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81015  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81016  76372  1 18:23 ?        00:00:00 [nginx]
+root      81017  76372  1 18:23 ?        00:00:00 [nginx]
+root      81018  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81019  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81020  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81021  76372  1 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81065  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81066  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81067  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81068  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81069  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81070  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81071  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81072  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81073  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81074  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81075  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81076  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81077  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81078  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81079  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81080  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81081  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81085  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81092  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81093  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81094  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81095  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81097  76372  3 18:23 ?        00:00:00 nginx: worker process
+root      81106  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81107  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81115  81107  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2121      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2122      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2123      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2124      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2125      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2126      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:2121
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:2121
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-2121-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2121;
+	app_id 5;
+	proxy_pass 192.168.30.47-2121-ftp;
+	proxy_service ftp;
+}
+upstream 192.168.30.47-2122-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2122;
+	app_id 5;
+	proxy_pass 192.168.30.47-2122-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2123-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2123;
+	app_id 5;
+	proxy_pass 192.168.30.47-2123-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2124-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2124;
+	app_id 5;
+	proxy_pass 192.168.30.47-2124-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2125-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2125;
+	app_id 5;
+	proxy_pass 192.168.30.47-2125-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2126-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2126;
+	app_id 5;
+	proxy_pass 192.168.30.47-2126-ftp;
+	proxy_service ftp_data;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:18 nginx: master process /usr/local/nginx/sbin/nginx
+root      81065  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81066  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81067  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81068  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81069  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81070  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81071  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81072  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81073  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81074  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81075  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81076  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81077  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81078  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81079  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81080  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81081  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81085  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81092  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81093  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81094  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81095  76372  1 18:23 ?        00:00:00 nginx: worker process
+root      81097  76372  3 18:23 ?        00:00:00 nginx: worker process
+root      81106  76372  2 18:23 ?        00:00:00 nginx: worker process
+root      81143  79970  0 18:23 ?        00:00:00 systemctl reload nginx_kernel
+root      81144      1  0 18:23 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      81145  80887  0 18:23 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81153  81145  0 18:23 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81183  80887  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81191  81183  0 18:24 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:160 检查ftp应用安全策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/ftp.json
+WARNING  common.rabbitmq:function.py:162 预期包含内容：106
+WARNING  common.rabbitmq:function.py:163 查询ftp.json命令返回值：
+[{
+    &quot;AppId&quot;:  5,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  106,
+        &quot;Action&quot;:  &quot;Allow&quot;,
+        &quot;Cmd&quot;:  [&quot;ABOR&quot;, &quot;ACCT&quot;, &quot;ADAT&quot;, &quot;ALLO&quot;, &quot;APPE&quot;, &quot;AUTH&quot;, &quot;CCC&quot;, &quot;CDUP&quot;, &quot;CONF&quot;, &quot;CWD&quot;, &quot;DELE&quot;, &quot;ENC&quot;, &quot;EPRT&quot;, &quot;EPSV&quot;, &quot;FEAT&quot;, &quot;HELP&quot;, &quot;LANG&quot;, &quot;LIST&quot;, &quot;LPRT&quot;, &quot;LPSV&quot;, &quot;MDTM&quot;, &quot;MIC&quot;, &quot;MKD&quot;, &quot;MLSD&quot;, &quot;MLST&quot;, &quot;MODE&quot;, &quot;NLST&quot;, &quot;NOOP&quot;, &quot;OPTS&quot;, &quot;PASS&quot;, &quot;PASV&quot;, &quot;PBSZ&quot;, &quot;PORT&quot;, &quot;PROT&quot;, &quot;PWD&quot;, &quot;QUIT&quot;, &quot;REIN&quot;, &quot;REST&quot;, &quot;RETR&quot;, &quot;RMD&quot;, &quot;RNFR&quot;, &quot;RNTO&quot;, &quot;SITE&quot;, &quot;SIZE&quot;, &quot;SMNT&quot;, &quot;STAT&quot;, &quot;STOU&quot;, &quot;STRU&quot;, &quot;SYST&quot;, &quot;TYPE&quot;, &quot;USER&quot;, &quot;XCUP&quot;, &quot;XMKD&quot;, &quot;XPWD&quot;, &quot;XRCP&quot;, &quot;XRMD&quot;, &quot;XRSQ&quot;, &quot;XSEM&quot;, &quot;XSEN&quot;]
+      }]
+  }]
+
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:168 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:173 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir:/
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home/ftp
+WARNING  data_check.con_ftp:con_ftp.py:56 creat dir://home/ftp/ftp_auto
+WARNING  data_check.con_ftp:con_ftp.py:72 Error:
+WARNING  common.rabbitmq:function.py:175 ftp上传(上传命令被禁止)文件C:\Users\admin\Desktop\work\1.txt的结果为:0
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:180 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  common.rabbitmq:function.py:182 ftp下载（允许下载命令）文件/home/ftp/ftp_auto/456.txt的结果为:1
+WARNING  data_check.con_ftp:con_ftp.py:32 *******已经成功连接&#x27;192.168.30.47&#x27;服务器FTP服务！！！
+WARNING  data_check.con_ftp:con_ftp.py:38 ftp登录成功
+WARNING  common.rabbitmq:function.py:187 欢迎语是：220 (vsFTPd 3.0.2)
+WARNING  data_check.con_ftp:con_ftp.py:189 当前所在位置:/home/ftp/ftp_auto/ftp_del
+WARNING  data_check.con_ftp:con_ftp.py:191 [&#x27;55&#x27;]
+WARNING  data_check.con_ftp:con_ftp.py:199 [&#x27;55&#x27;]
+WARNING  data_check.con_ftp:con_ftp.py:207 55是文件夹
+WARNING  data_check.con_ftp:con_ftp.py:210 []
+WARNING  common.rabbitmq:function.py:189 ftp删除（允许删除命令）文件/home/ftp/ftp_auto/ftp_del的结果为:None</div></td></tr></tbody></table></body></html>

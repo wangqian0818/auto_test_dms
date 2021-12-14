@@ -1,0 +1,10 @@
+## folders
+
+__pycache__
+.pytest_cache
+.idea
+Case_rbm/**/__pycache__
+Case_ssh/**/__pycache__
+common/__pycache__
+data_check/__pycache__
+

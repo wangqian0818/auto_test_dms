@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>测试报告</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (展开详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (隐藏详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+/*
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);*/
+function add_collapse() {  // modify by linux超
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">显示详情</a> / ' +
+                            '<a href="javascript:hide_all_extras()">隐藏详情</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+	// 修改用例报告显示的用例名称 add by linux超
+	var case_name_td = document.getElementsByClassName("col-name");
+		for(var i = 0; i < case_name_td.length; i++)
+			try{
+				case_name_td[i].innerText = case_name_td[i].innerText.split("\[")[1].split("\]")[0];
+			}
+			catch(err){
+				// 如果表格中没有[]会抛异常，如果抛异常我就显示null，如果你想显示别的东西自己改吧，因为通常只要我们使用参数化就有[]显示
+				case_name_td[i].innerText = "测试用例无参数化数据null";
+			}
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>[mail_check_addr]-[10.10.101.47]-[20211124_18-54-11].html</h1>
+    <p>生成报告时间24-Nov-2021 18:55:33 Pytest-Html版本：<a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.22.1.dev11+g4f729c1</p>
+    <h2>测试环境</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.5.0&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;0.13.1&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;allure-pytest&apos;: &apos;2.8.6&apos;, &apos;assume&apos;: &apos;2.4.2&apos;, &apos;base-url&apos;: &apos;1.4.2&apos;, &apos;cov&apos;: &apos;2.10.1&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;instafail&apos;: &apos;0.4.2&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;reportlog&apos;: &apos;0.1.2&apos;, &apos;rerunfailures&apos;: &apos;9.1.1&apos;, &apos;sugar&apos;: &apos;0.9.4&apos;, &apos;xdist&apos;: &apos;2.2.0&apos;, &apos;html&apos;: &apos;1.22.1.dev11+g4f729c1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.6</td></tr>
+      <tr>
+        <td>用例执行时间</td>
+        <td>2021-11-24 18:54:12</td></tr>
+      <tr>
+        <td>设备IP</td>
+        <td>10.10.101.47</td></tr></table>
+    <h2>用例统计</h2>
+    <p>所属部门: 卓讯-合肥测试部</p>
+    <p>测试人员: 王谦</p>
+    <p>【 -------------------------- 网关设备版本号 ----------------------------- 】</p>
+    <p>【 agentjsac-1.1.903-rc.x86_64 】</p>
+    <p>【 driverjsac-1.1.897-rc.x86_64 】</p>
+    <p>【 libhostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 tsthostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 nginx-0.0.472-kernel_rc.x86_64 】</p>
+    <p>执行了2个测试用例, 历时:81.16秒 . </p>
+    <p class="filter" hidden="true">(取消)勾选复选框, 以便筛选测试结果</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">2 通过</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 跳过</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 失败</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 错误</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 预期失败</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 预期通过</span>, <input checked="true" class="filter" data-test-result="重跑" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="重跑">0 重跑</span>
+    <h2>测试结果</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">通过/失败</th>
+          <th class="sortable time" col="time">Time</th>
+          <th>Test_nodeId</th>
+          <th class="sortable numeric" col="duration">耗时</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">无测试结果, 试着选择其他测试结果条件</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-time">2021-11-24 10:54:53.159246</td>
+          <td>Case_rbm/mail_check_addr/function.py::Test_mail_check_addr::test_mail_check_addr_a1</td>
+          <td class="col-duration">40.75</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">------------------------------ Captured log setup ------------------------------<br/>WARNING  common.ssh:ssh.py:49 ssh 连接开始
+WARNING  common.ssh:ssh.py:55 ssh连接主机：10.10.101.47  完成!
+WARNING  common.ssh:ssh.py:62 ssh服务器: 10.10.101.47连接成功------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:05 nginx: master process /usr/local/nginx/sbin/nginx
+root      87397  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87398  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87399  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87400  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87401  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87402  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87403  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87404  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87405  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87406  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87407  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87408  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87409  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87410  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87411  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87412  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87413  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87414  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87415  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87416  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87417  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87418  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87419  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87420  76372  0 18:42 ?        00:00:00 nginx: worker process
+root      87546  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87547      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87548  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87556  87548  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:08 nginx: master process /usr/local/nginx/sbin/nginx
+root      87560  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87561  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87562  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87563  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87564  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87565  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87566  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87567  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87568  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87569  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87570  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87571  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87572  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87573  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87574  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87575  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87576  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87577  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87578  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87579  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87580  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87581  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87582  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87583  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87584  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87592  87584  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:08 nginx: master process /usr/local/nginx/sbin/nginx
+root      87560  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87561  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87562  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87563  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87564  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87565  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87566  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87567  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87568  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87569  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87570  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87571  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87572  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87573  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87574  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87575  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87576  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87577  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87578  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87579  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87580  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87581  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87582  76372  4 18:54 ?        00:00:00 nginx: worker process
+root      87583  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87606  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87607  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87608      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87616  87607  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:11 nginx: master process /usr/local/nginx/sbin/nginx
+root      87620  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87621  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87622  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87623  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87624  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87625  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87626  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87627  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87628  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87629  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87630  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87631  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87632  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87633  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87634  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87635  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87636  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87637  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87638  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87639  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87640  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87641  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87642  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87643  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      87644  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87652  87644  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8885      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8886      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:8885
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/3_8885_smtp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8885
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-8885-smtp {
+	server 192.168.50.33:25;
+}
+server {
+	listen 192.168.30.47:8885;
+	app_id 3;
+	proxy_pass 192.168.30.47-8885-smtp;
+	proxy_service smtp;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8885      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8886      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:8886
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/4_8886_pop3.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8886
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-8886-pop3 {
+	server 192.168.50.33:110;
+}
+server {
+	listen 192.168.30.47:8886;
+	app_id 4;
+	proxy_pass 192.168.30.47-8886-pop3;
+	proxy_service pop3;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:11 nginx: master process /usr/local/nginx/sbin/nginx
+root      87620  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87621  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87622  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87623  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87624  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87625  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87626  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87627  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87628  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87629  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87630  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87631  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87632  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87633  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87634  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87635  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87636  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87637  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87638  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87639  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87640  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87641  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87642  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87643  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87694  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87695  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87696      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87704  87695  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:14 nginx: master process /usr/local/nginx/sbin/nginx
+root      87706  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87707  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87708  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87709  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87710  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87711  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87712  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87713  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87714  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87715  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87716  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87717  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87718  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87719  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87720  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87721  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87722  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87723  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87724  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87725  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87726  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87727  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87728  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87729  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87730  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87738  87730  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:95 检查smtp应用安全策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/mail.json
+WARNING  common.rabbitmq:function.py:97 预期包含内容：104
+WARNING  common.rabbitmq:function.py:98 查询mail.json命令返回值：
+[{
+    &quot;AppId&quot;:  3,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  104,
+        &quot;Action&quot;:  &quot;Allow&quot;,
+        &quot;FromTo&quot;:  [&quot;autotest_send@jusontech.com&quot;]
+      }]
+  }]
+
+WARNING  common.rabbitmq:function.py:105 白名单地址autotest_send@jusontech.com结果为:1
+WARNING  common.rabbitmq:function.py:112 非白名单地址jusontest@163.com结果为:0
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:14 nginx: master process /usr/local/nginx/sbin/nginx
+root      87706  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87707  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87708  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87709  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87710  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87711  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87712  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87713  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87714  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87715  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87716  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87717  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87718  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87719  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87720  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87721  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87722  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87723  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87724  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87725  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87726  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87727  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87728  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87729  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87759  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87760      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87761  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87769  87761  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:17 nginx: master process /usr/local/nginx/sbin/nginx
+root      87706  76372  2 18:54 ?        00:00:00 [nginx]
+root      87707  76372  2 18:54 ?        00:00:00 [nginx]
+root      87708  76372  2 18:54 ?        00:00:00 [nginx]
+root      87709  76372  2 18:54 ?        00:00:00 [nginx]
+root      87710  76372  2 18:54 ?        00:00:00 [nginx]
+root      87711  76372  2 18:54 ?        00:00:00 [nginx]
+root      87712  76372  2 18:54 ?        00:00:00 [nginx]
+root      87713  76372  2 18:54 ?        00:00:00 [nginx]
+root      87714  76372  2 18:54 ?        00:00:00 [nginx]
+root      87715  76372  2 18:54 ?        00:00:00 [nginx]
+root      87716  76372  2 18:54 ?        00:00:00 [nginx]
+root      87717  76372  2 18:54 ?        00:00:00 [nginx]
+root      87718  76372  2 18:54 ?        00:00:00 [nginx]
+root      87719  76372  2 18:54 ?        00:00:00 [nginx]
+root      87720  76372  2 18:54 ?        00:00:00 [nginx]
+root      87721  76372  2 18:54 ?        00:00:00 [nginx]
+root      87722  76372  2 18:54 ?        00:00:00 [nginx]
+root      87723  76372  2 18:54 ?        00:00:00 [nginx]
+root      87724  76372  2 18:54 ?        00:00:00 [nginx]
+root      87725  76372  2 18:54 ?        00:00:00 [nginx]
+root      87726  76372  2 18:54 ?        00:00:00 [nginx]
+root      87727  76372  2 18:54 ?        00:00:00 [nginx]
+root      87728  76372  2 18:54 ?        00:00:00 [nginx]
+root      87729  76372  2 18:54 ?        00:00:00 [nginx]
+root      87771  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87772  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87773  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87774  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87775  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87776  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87777  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87778  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87779  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87780  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87781  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87782  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87783  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87784  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87785  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87786  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87787  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87788  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87789  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87790  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87791  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87792  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87793  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87794  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87795  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87803  87795  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:121 检查邮件安全浏览策略是否清空
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/mail.json
+WARNING  common.rabbitmq:function.py:123 预期不包含内容：104
+WARNING  common.rabbitmq:function.py:124 查询mail.json命令返回值：
+[]
+
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:17 nginx: master process /usr/local/nginx/sbin/nginx
+root      87771  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87772  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87773  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87774  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87775  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87776  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87777  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87778  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87779  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87780  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87781  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87782  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87783  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87784  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87785  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87786  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87787  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87788  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87789  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87790  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87791  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87792  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87793  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87794  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87826  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87828  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87832      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87836  87826  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      87838  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87839  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87840  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87841  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87842  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87843  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87844  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87845  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87846  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87847  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87848  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87849  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87850  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87851  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87852  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87853  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87854  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87855  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87856  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87857  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87858  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87859  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87860  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87861  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87862  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87870  87862  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      87838  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87839  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87840  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87841  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87842  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87843  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87844  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87845  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87846  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87847  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87848  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87849  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87850  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87851  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87852  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87853  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87854  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87855  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87856  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87857  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87858  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87859  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87860  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87861  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87886  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87894  87886  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:23 nginx: master process /usr/local/nginx/sbin/nginx
+root      87898  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87899  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87900  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87901  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87902  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87903  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87904  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87905  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87906  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87907  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87908  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87909  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87910  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87911  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87912  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87913  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87914  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87915  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87916  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87917  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87918  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87919  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87920  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87921  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      87922  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87930  87922  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:545 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:546 预期不包含内容：192.168.30.47:8885
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/3_8885_smtp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8885
+WARNING  common.fun:fun.py:555 代理文件内容为：
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:545 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:546 预期不包含内容：192.168.30.47:8886
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/4_8886_pop3.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8886
+WARNING  common.fun:fun.py:555 代理文件内容为：
+
+WARNING  common.fun:fun.py:560 代理文件检查通过</div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-time">2021-11-24 10:55:33.178140</td>
+          <td>Case_rbm/mail_check_addr/function.py::Test_mail_check_addr::test_mail_check_addr_a2</td>
+          <td class="col-duration">40.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:23 nginx: master process /usr/local/nginx/sbin/nginx
+root      87898  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87899  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87900  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87901  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87902  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87903  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87904  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87905  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87906  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87907  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87908  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87909  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87910  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87911  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87912  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87913  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87914  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87915  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87916  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87917  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87918  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87919  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87920  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87921  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87972  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+root      87973      1  0 18:54 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      87974  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      87982  87974  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:26 nginx: master process /usr/local/nginx/sbin/nginx
+root      87986  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87987  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87988  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87989  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87990  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87991  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87992  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87993  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87994  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87995  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87996  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87997  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87998  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87999  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88000  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88001  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88002  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      88003  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88004  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88005  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88006  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88007  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88008  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      88009  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      88010  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88018  88010  0 18:54 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:26 nginx: master process /usr/local/nginx/sbin/nginx
+root      87986  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87987  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87988  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87989  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87990  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87991  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87992  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87993  76372  0 18:54 ?        00:00:00 nginx: worker process
+root      87994  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87995  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87996  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87997  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87998  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      87999  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88000  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88001  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88002  76372  2 18:54 ?        00:00:00 nginx: worker process
+root      88003  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88004  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88005  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88006  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88007  76372  1 18:54 ?        00:00:00 nginx: worker process
+root      88008  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      88009  76372  3 18:54 ?        00:00:00 nginx: worker process
+root      88032  87531  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88040  88032  0 18:54 ?        00:00:00 grep nginx
+root      88041  79970  0 18:54 ?        00:00:00 systemctl reload nginx_kernel
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:29 nginx: master process /usr/local/nginx/sbin/nginx
+root      88050  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88051  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88052  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88053  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88054  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88055  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88056  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88057  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88058  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88059  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88060  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88061  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88062  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88063  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88064  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88065  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88066  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88067  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88068  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88069  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88070  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88071  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88072  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88073  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88074  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88082  88074  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8885      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8886      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:8885
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/3_8885_smtp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8885
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-8885-smtp {
+	server 192.168.50.33:25;
+}
+server {
+	listen 192.168.30.47:8885;
+	app_id 3;
+	proxy_pass 192.168.30.47-8885-smtp;
+	proxy_service smtp;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8885      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:8886      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:8886
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/4_8886_pop3.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8886
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-8886-pop3 {
+	server 192.168.50.33:110;
+}
+server {
+	listen 192.168.30.47:8886;
+	app_id 4;
+	proxy_pass 192.168.30.47-8886-pop3;
+	proxy_service pop3;
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:29 nginx: master process /usr/local/nginx/sbin/nginx
+root      88050  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88051  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88052  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88053  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88054  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88055  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88056  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88057  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88058  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88059  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88060  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88061  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88062  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88063  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88064  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88065  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88066  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88067  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88068  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88069  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88070  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88071  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88072  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88073  76372  3 18:55 ?        00:00:00 nginx: worker process
+root      88124  79970  0 18:55 ?        00:00:00 systemctl reload nginx_kernel
+root      88125      1  0 18:55 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      88126  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88134  88126  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:32 nginx: master process /usr/local/nginx/sbin/nginx
+root      88050  76372  4 18:55 ?        00:00:00 [nginx]
+root      88051  76372  4 18:55 ?        00:00:00 [nginx]
+root      88052  76372  4 18:55 ?        00:00:00 [nginx]
+root      88053  76372  4 18:55 ?        00:00:00 [nginx]
+root      88054  76372  5 18:55 ?        00:00:00 [nginx]
+root      88055  76372  4 18:55 ?        00:00:00 [nginx]
+root      88056  76372  5 18:55 ?        00:00:00 [nginx]
+root      88057  76372  5 18:55 ?        00:00:00 [nginx]
+root      88058  76372  5 18:55 ?        00:00:00 [nginx]
+root      88059  76372  4 18:55 ?        00:00:00 [nginx]
+root      88060  76372  4 18:55 ?        00:00:00 [nginx]
+root      88061  76372  4 18:55 ?        00:00:00 [nginx]
+root      88062  76372  5 18:55 ?        00:00:00 [nginx]
+root      88063  76372  4 18:55 ?        00:00:00 [nginx]
+root      88064  76372  5 18:55 ?        00:00:00 [nginx]
+root      88065  76372  4 18:55 ?        00:00:00 [nginx]
+root      88066  76372  5 18:55 ?        00:00:00 [nginx]
+root      88067  76372  5 18:55 ?        00:00:00 [nginx]
+root      88068  76372  5 18:55 ?        00:00:00 [nginx]
+root      88069  76372  5 18:55 ?        00:00:00 [nginx]
+root      88070  76372  6 18:55 ?        00:00:00 [nginx]
+root      88071  76372  5 18:55 ?        00:00:00 [nginx]
+root      88072  76372  5 18:55 ?        00:00:00 [nginx]
+root      88073  76372  5 18:55 ?        00:00:00 [nginx]
+root      88136  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88137  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88138  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88139  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88140  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88141  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88142  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88143  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88144  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88145  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88146  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88147  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88148  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88149  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88150  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88151  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88152  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88153  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88154  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88155  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88156  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88157  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88158  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88159  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88160  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88168  88160  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:162 检查smtp应用安全策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/mail.json
+WARNING  common.rabbitmq:function.py:164 预期包含内容：104
+WARNING  common.rabbitmq:function.py:165 查询mail.json命令返回值：
+[{
+    &quot;AppId&quot;:  3,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  104,
+        &quot;Action&quot;:  &quot;Allow&quot;,
+        &quot;FromTo&quot;:  [&quot;autotest_send@jusontech.com&quot;, &quot;autotest_recv@jusontech.com&quot;]
+      }]
+  }]
+
+WARNING  common.rabbitmq:function.py:168 白名单地址发送邮件
+WARNING  common.rabbitmq:function.py:172 白名单地址autotest_send@jusontech.com结果为:1
+WARNING  common.rabbitmq:function.py:175 白名单地址接收邮件
+WARNING  common.rabbitmq:function.py:177 self.pop3_email:autotest_recv@jusontech.com, self.pop3_pwd:1q2w3e, self.pop3_proxy_host:192.168.30.47, self.pop3_proxy_port:8886
+WARNING  data_check.recv_pop3:recv_pop3.py:96 From:  &lt;autotest_send@jusontech.com&gt;
+WARNING  data_check.recv_pop3:recv_pop3.py:96 To:  &lt;autotest_recv@jusontech.com&gt;
+WARNING  data_check.recv_pop3:recv_pop3.py:96 Cc:  &lt;autotest_send@jusontech.com&gt;
+WARNING  data_check.recv_pop3:recv_pop3.py:96 Subject: 关于mail_check_addr
+WARNING  data_check.recv_pop3:recv_pop3.py:100 part 0
+WARNING  data_check.recv_pop3:recv_pop3.py:101 --------------------
+WARNING  data_check.recv_pop3:recv_pop3.py:110   Text: 测试内容-content...
+WARNING  common.rabbitmq:function.py:181 白名单接收者autotest_recv@jusontech.com成功接收邮件
+WARNING  common.rabbitmq:function.py:183 非白名单地址发送邮件
+WARNING  common.rabbitmq:function.py:187 非白名单地址jusontest@163.com结果为:0
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:32 nginx: master process /usr/local/nginx/sbin/nginx
+root      88136  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88137  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88138  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88139  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88140  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88141  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88142  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88143  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88144  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88145  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88146  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88147  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88148  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88149  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88150  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88151  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88152  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88153  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88154  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88155  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88156  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88157  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88158  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88159  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88189  79970  0 18:55 ?        00:00:00 systemctl reload nginx_kernel
+root      88190      1  0 18:55 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      88191  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88199  88191  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      88201  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88202  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88203  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88204  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88205  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88206  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88207  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88208  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88209  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88210  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88211  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88212  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88213  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88214  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88215  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88216  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88217  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88218  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88219  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88220  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88221  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88222  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88223  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88224  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88225  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88233  88225  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:196 检查邮件安全浏览策略是否清空
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/mail.json
+WARNING  common.rabbitmq:function.py:198 预期不包含内容：104
+WARNING  common.rabbitmq:function.py:199 查询mail.json命令返回值：
+[]
+
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      88201  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88202  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88203  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88204  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88205  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88206  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88207  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88208  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88209  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88210  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88211  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88212  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88213  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88214  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88215  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88216  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88217  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88218  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88219  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88220  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88221  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88222  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88223  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88224  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88256  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88264  88256  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      88268  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88269  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88270  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88271  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88272  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88273  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88274  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88275  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88276  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88277  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88278  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88279  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88280  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88281  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88282  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88283  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88284  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88285  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88286  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88287  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88288  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88289  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88290  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88291  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88292  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88300  88292  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:03:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      88268  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88269  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88270  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88271  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88272  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88273  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88274  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88275  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88276  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88277  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88278  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88279  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88280  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88281  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88282  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88283  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88284  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88285  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88286  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88287  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88288  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88289  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88290  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88291  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88313  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88324  88313  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:03:40 nginx: master process /usr/local/nginx/sbin/nginx
+root      88328  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88329  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88330  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88331  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88332  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88333  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88334  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88335  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88336  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88337  76372  0 18:55 ?        00:00:00 nginx: worker process
+root      88338  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88339  76372  2 18:55 ?        00:00:00 nginx: worker process
+root      88340  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88341  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88342  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88343  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88344  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88345  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88346  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88347  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88348  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88349  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88350  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88351  76372  1 18:55 ?        00:00:00 nginx: worker process
+root      88352  87531  0 18:55 ?        00:00:00 bash -c ps -ef |grep nginx
+root      88360  88352  0 18:55 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:545 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:546 预期不包含内容：192.168.30.47:8885
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/3_8885_smtp.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8885
+WARNING  common.fun:fun.py:555 代理文件内容为：
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:545 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:546 预期不包含内容：192.168.30.47:8886
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/other_proxy/4_8886_pop3.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:8886
+WARNING  common.fun:fun.py:555 代理文件内容为：
+
+WARNING  common.fun:fun.py:560 代理文件检查通过</div></td></tr></tbody></table></body></html>

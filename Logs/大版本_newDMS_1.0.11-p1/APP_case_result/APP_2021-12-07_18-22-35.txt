@@ -1,0 +1,9 @@
+
+--------------------------------------- 第5行策略执行情况 --------------------------------------- 
+策略内容：[{'Action': 'deny', 'Cmpns': [], 'Cmds': [{'para': '', 'offset': 0, 'delimiter': '', 'end': '', 'cmd': 'ssh'}], 'Direction': 'upstream', 'RuleId': 107}]
+请求方式【上传：scp -P 代理port /local_file_path/local_file_name root@代理ip:/remote_file_path/】所验证的URL为：scp -P 2287 C:\Users\admin\Desktop\work\1.txt root@192.168.30.47:/opt/pkt/
+预期结果为：阻断
+实际执行返回码为：0
+执行结果为：success
+
+

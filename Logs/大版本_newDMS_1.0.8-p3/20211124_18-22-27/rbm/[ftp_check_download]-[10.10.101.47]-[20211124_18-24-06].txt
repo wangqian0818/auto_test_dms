@@ -1,0 +1,1437 @@
+2021-11-24 18:24:07 [WARNING] E:/TempData/d_auto_test/auto_test_dms/Case_rbm/ftp_check_download
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.47完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.148完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.149完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.100.1完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.88.53完成!
+2021-11-24 18:24:07 [WARNING] <ConnectionParameters host=10.10.101.233 port=5672 virtual_host=/ ssl=False>
+2021-11-24 18:24:07 [WARNING] Rabbitmq初始化完成: 10.10.101.233:5672
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.111完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.112完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.180完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.101.26完成!
+2021-11-24 18:24:07 [WARNING] ssh初始化: 10.10.100.201完成!
+2021-11-24 18:24:07 [WARNING] base_path: E:/TempData/d_auto_test
+2021-11-24 18:24:07 [WARNING] ssh 连接开始
+2021-11-24 18:24:07 [WARNING] ssh连接主机：10.10.101.47  完成!
+2021-11-24 18:24:07 [WARNING] ssh服务器: 10.10.101.47连接成功
+2021-11-24 18:24:07 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --switch on
+2021-11-24 18:24:07 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:07 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf  --action forward
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --selabel on
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --cycle 15
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4aclcycle 30
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --domain off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --netflow off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4acl off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --syncookie off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --ckoption off
+2021-11-24 18:24:08 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:08 [WARNING] clear_env_cmd:export cardid=0&&defconf --noflow off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=0&&defconf --droperr off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=0&&defconf --tcpmss 0
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --switch on
+2021-11-24 18:24:09 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf  --action forward
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf --selabel on
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf --cycle 15
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4aclcycle 30
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf --domain off
+2021-11-24 18:24:09 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:09 [WARNING] clear_env_cmd:export cardid=1&&defconf --netflow off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4acl off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --syncookie off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --ckoption off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --noflow off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --droperr off
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] clear_env_cmd:export cardid=1&&defconf --tcpmss 0
+2021-11-24 18:24:10 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:24:10 [WARNING] =========================== clear_env 结束 耗时：2.7047646045684814s ==================================
+2021-11-24 18:24:10 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:24:10 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81529  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81537  81529  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:15 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:15 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81538  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81546  81538  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:15 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:15 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:15 [WARNING] =========================== data_check_setup_met 结束 耗时：5.33971381187439s ==================================
+2021-11-24 18:24:15 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:15 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:15 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:15 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:16 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:20 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81558  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81566  81558  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:20 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:21 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:21 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:22 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81574  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81575  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81576  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81577  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81578  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81579  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81580  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81581  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81582  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81583  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81584  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81585  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81586  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81587  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81588  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81589  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81597  81588  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:21 [WARNING] 当前有39个进程启动成功
+2021-11-24 18:24:21 [WARNING] 这是进程的第2次等待
+2021-11-24 18:24:21 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:22 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81574  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81575  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81576  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81577  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81578  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81579  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81580  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81581  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81582  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81583  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81584  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81585  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81586  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81587  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81589  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81598  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81599  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81600  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81601  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81602  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81604  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81611  81602  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:21 [WARNING] 当前有44个进程启动成功
+2021-11-24 18:24:21 [WARNING] 这是进程的第3次等待
+2021-11-24 18:24:21 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:22 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81156  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81157  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81158  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81159  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81160  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81161  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81162  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81163  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81164  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81165  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81166  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81167  76372  0 18:23 ?        00:00:00 nginx: worker process is shutting down
+root      81168  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81169  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81170  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81171  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81172  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81173  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81174  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81175  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81176  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81177  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81178  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      81574  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81575  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81576  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81577  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81578  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81579  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81580  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81581  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81582  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81583  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81584  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81585  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81586  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81587  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81589  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81598  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81599  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81600  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81601  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81604  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81612  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81613  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81614  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81615  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81616  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81624  81616  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:21 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:21 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:21 [WARNING] 检查代理端口是否监听
+2021-11-24 18:24:21 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:24:21 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2121      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2122      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2123      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2124      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2125      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2126      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:24:21 [WARNING] 预期包含内容：192.168.30.47:2121
+2021-11-24 18:24:21 [WARNING] 端口监听检查通过
+2021-11-24 18:24:21 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:24:21 [WARNING] 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+2021-11-24 18:24:21 [WARNING] 检查内容为：192.168.30.47:2121
+2021-11-24 18:24:21 [WARNING] 代理文件内容为：
+upstream 192.168.30.47-2121-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2121;
+	app_id 5;
+	proxy_pass 192.168.30.47-2121-ftp;
+	proxy_service ftp;
+}
+upstream 192.168.30.47-2122-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2122;
+	app_id 5;
+	proxy_pass 192.168.30.47-2122-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2123-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2123;
+	app_id 5;
+	proxy_pass 192.168.30.47-2123-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2124-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2124;
+	app_id 5;
+	proxy_pass 192.168.30.47-2124-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2125-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2125;
+	app_id 5;
+	proxy_pass 192.168.30.47-2125-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2126-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2126;
+	app_id 5;
+	proxy_pass 192.168.30.47-2126-ftp;
+	proxy_service ftp_data;
+}
+
+2021-11-24 18:24:21 [WARNING] 代理文件检查通过
+2021-11-24 18:24:21 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:21 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:21 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:21 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:22 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:22 nginx: master process /usr/local/nginx/sbin/nginx
+root      81155  76372  1 18:23 ?        00:00:00 [nginx]
+root      81157  76372  1 18:23 ?        00:00:00 [nginx]
+root      81160  76372  1 18:23 ?        00:00:00 [nginx]
+root      81161  76372  1 18:23 ?        00:00:00 [nginx]
+root      81162  76372  1 18:23 ?        00:00:00 [nginx]
+root      81163  76372  1 18:23 ?        00:00:00 [nginx]
+root      81165  76372  1 18:23 ?        00:00:00 [nginx]
+root      81166  76372  1 18:23 ?        00:00:00 [nginx]
+root      81167  76372  1 18:23 ?        00:00:00 [nginx]
+root      81168  76372  1 18:24 ?        00:00:00 [nginx]
+root      81169  76372  1 18:24 ?        00:00:00 [nginx]
+root      81170  76372  1 18:24 ?        00:00:00 [nginx]
+root      81172  76372  1 18:24 ?        00:00:00 [nginx]
+root      81173  76372  1 18:24 ?        00:00:00 [nginx]
+root      81174  76372  1 18:24 ?        00:00:00 [nginx]
+root      81176  76372  1 18:24 ?        00:00:00 [nginx]
+root      81177  76372  1 18:24 ?        00:00:00 [nginx]
+root      81178  76372  1 18:24 ?        00:00:00 [nginx]
+root      81574  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81575  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81576  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      81577  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81578  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81579  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81580  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81581  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81582  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81583  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81584  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81585  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81586  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81587  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81589  76372  3 18:24 ?        00:00:00 nginx: worker process
+root      81598  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81599  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81600  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81601  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81604  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81612  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81613  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81614  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81615  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81652  79970  0 18:24 ?        00:00:00 systemctl reload nginx_kernel
+root      81653      1  0 18:24 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      81654  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81662  81654  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:26 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:27 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:27 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:24 nginx: master process /usr/local/nginx/sbin/nginx
+root      81664  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81665  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81666  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81667  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81668  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81669  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81670  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81671  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81672  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81673  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81674  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81675  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81676  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81677  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81678  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81679  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81680  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81681  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81682  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81683  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81684  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81685  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81686  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81687  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81688  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81696  81688  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:27 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:27 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:27 [WARNING] 检查ftp应用安全策略是否下发成功
+2021-11-24 18:24:27 [WARNING] 查询命令为：cat /etc/jsac/ftp.json
+2021-11-24 18:24:27 [WARNING] 预期包含内容：106
+2021-11-24 18:24:27 [WARNING] 查询ftp.json命令返回值：
+[{
+    "AppId":  5,
+    "AppRules":  [{
+        "RuleId":  106,
+        "Action":  "Deny",
+        "DownloadExt":  ["pdf"]
+      }]
+  }]
+
+2021-11-24 18:24:27 [WARNING] *******已经成功连接'192.168.30.47'服务器FTP服务！！！
+2021-11-24 18:24:27 [WARNING] ftp登录成功
+2021-11-24 18:24:27 [WARNING] 欢迎语是：220 (vsFTPd 3.0.2)
+2021-11-24 18:24:27 [WARNING] ftp下载文件扩展名/home/ftp/ftp_auto/456.txt为非黑名单结果为:1
+2021-11-24 18:24:27 [WARNING] *******已经成功连接'192.168.30.47'服务器FTP服务！！！
+2021-11-24 18:24:27 [WARNING] ftp登录成功
+2021-11-24 18:24:27 [WARNING] 欢迎语是：220 (vsFTPd 3.0.2)
+2021-11-24 18:24:27 [WARNING] Error:
+2021-11-24 18:24:27 [WARNING] ftp下载文件扩展名/home/ftp/ftp_auto/456.pdf为黑名单结果为:0
+2021-11-24 18:24:27 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:27 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:27 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:27 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:27 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:24 nginx: master process /usr/local/nginx/sbin/nginx
+root      81664  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81665  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81666  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81667  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81668  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81669  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81670  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81671  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81672  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81673  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81674  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81675  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81676  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81677  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81678  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81679  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81680  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81681  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81682  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81683  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81684  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81685  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81686  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81687  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81717  79970  0 18:24 ?        00:00:00 systemctl reload nginx_kernel
+root      81718      1  0 18:24 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      81719  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81727  81719  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:32 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:32 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:32 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:26 nginx: master process /usr/local/nginx/sbin/nginx
+root      81729  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81730  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81731  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81732  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81733  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81734  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81735  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81736  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81737  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81738  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81739  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81740  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81741  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81742  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81743  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81744  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81745  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81746  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81747  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81748  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81749  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81750  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81751  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81752  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81753  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81761  81753  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:32 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:32 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:32 [WARNING] 检查网页安全浏览策略是否清空
+2021-11-24 18:24:32 [WARNING] 查询命令为：cat /etc/jsac/ftp.json
+2021-11-24 18:24:32 [WARNING] 预期不包含内容：106
+2021-11-24 18:24:32 [WARNING] 查询ftp.json命令返回值：
+[]
+
+2021-11-24 18:24:32 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:32 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:32 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:32 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:32 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:26 nginx: master process /usr/local/nginx/sbin/nginx
+root      81729  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81730  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81731  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81732  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81733  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81734  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81735  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81736  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81737  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81738  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81739  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81740  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81741  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81742  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81743  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81744  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81745  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81746  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81747  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81748  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81749  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81750  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81751  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81752  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81784  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81792  81784  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:37 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:37 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:37 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:28 nginx: master process /usr/local/nginx/sbin/nginx
+root      81796  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81797  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81798  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81799  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81800  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81801  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81802  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81803  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81804  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81805  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81806  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81807  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81808  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81809  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81810  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81811  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81812  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81813  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81814  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81815  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81816  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81817  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81818  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81819  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81820  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81828  81820  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:37 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:37 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:37 [WARNING] 检查代理端口是否监听
+2021-11-24 18:24:37 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:24:38 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:24:38 [WARNING] 预期不包含内容：192.168.30.47:2121
+2021-11-24 18:24:38 [WARNING] 端口监听检查通过
+2021-11-24 18:24:38 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:24:38 [WARNING] 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+2021-11-24 18:24:38 [WARNING] 检查内容为：192.168.30.47:2121
+2021-11-24 18:24:38 [WARNING] 代理文件内容为：
+
+2021-11-24 18:24:38 [WARNING] 代理文件检查通过
+2021-11-24 18:24:38 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:38 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:38 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:38 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:38 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:28 nginx: master process /usr/local/nginx/sbin/nginx
+root      81796  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81797  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81798  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81799  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81800  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81801  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81802  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81803  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81804  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81805  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81806  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81807  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81808  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81809  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81810  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81811  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81812  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81813  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81814  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81815  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81816  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81817  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81818  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81819  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81856  79970  0 18:24 ?        00:00:00 systemctl reload nginx_kernel
+root      81857      1  0 18:24 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      81858  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81866  81858  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:43 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:43 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:43 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:30 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81892  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81900  81892  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:43 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:43 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:43 [WARNING] =========================== data_check_teardown_met 结束 耗时：5.367669343948364s ==================================
+2021-11-24 18:24:43 [WARNING] 
+ start----------------------------------------------------------------------------------------------------
+2021-11-24 18:24:43 [WARNING] 
+result: test_ftp_check_download_a1 -- passed
+2021-11-24 18:24:43 [WARNING] 
+ end----------------------------------------------------------------------------------------------------
+2021-11-24 18:24:43 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:24:43 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:30 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81910  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81918  81910  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:48 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:48 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:30 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81919  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81927  81919  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:48 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:48 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:48 [WARNING] =========================== data_check_setup_met 结束 耗时：5.304808616638184s ==================================
+2021-11-24 18:24:48 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:48 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:48 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:48 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:48 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:30 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81937  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81945  81937  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:53 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:54 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:54 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:32 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81957  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      81965  81957  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:54 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:54 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:54 [WARNING] 检查代理端口是否监听
+2021-11-24 18:24:54 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:24:54 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2121      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 192.168.30.47:2122      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:24:54 [WARNING] 预期包含内容：192.168.30.47:2121
+2021-11-24 18:24:54 [WARNING] 端口监听检查通过
+2021-11-24 18:24:54 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:24:54 [WARNING] 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+2021-11-24 18:24:54 [WARNING] 检查内容为：192.168.30.47:2121
+2021-11-24 18:24:54 [WARNING] 代理文件内容为：
+upstream 192.168.30.47-2121-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2121;
+	app_id 5;
+	proxy_pass 192.168.30.47-2121-ftp;
+	proxy_service ftp;
+}
+upstream 192.168.30.47-2122-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2122;
+	app_id 5;
+	proxy_pass 192.168.30.47-2122-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2123-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2123;
+	app_id 5;
+	proxy_pass 192.168.30.47-2123-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2124-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2124;
+	app_id 5;
+	proxy_pass 192.168.30.47-2124-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2125-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2125;
+	app_id 5;
+	proxy_pass 192.168.30.47-2125-ftp;
+	proxy_service ftp_data;
+}
+upstream 192.168.30.47-2126-ftp {
+	server 10.10.101.193:21;
+}
+server {
+	listen 192.168.30.47:2126;
+	app_id 5;
+	proxy_pass 192.168.30.47-2126-ftp;
+	proxy_service ftp_data;
+}
+
+2021-11-24 18:24:54 [WARNING] 代理文件检查通过
+2021-11-24 18:24:54 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:54 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:54 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:54 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:54 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:32 nginx: master process /usr/local/nginx/sbin/nginx
+root      81868  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81869  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81870  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81871  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81872  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81873  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81874  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81875  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81876  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81877  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81878  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81879  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81880  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81881  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81882  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81883  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81884  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81885  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81886  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81887  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81888  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81889  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81890  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81891  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      81995  79970  0 18:24 ?        00:00:00 systemctl reload nginx_kernel
+root      81996      1  0 18:24 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      81997  81246  0 18:24 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82005  81997  0 18:24 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:59 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:24:59 [WARNING] 这是进程的第1次等待
+2021-11-24 18:24:59 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:36 nginx: master process /usr/local/nginx/sbin/nginx
+root      82037  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82038  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82039  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82040  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82041  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82042  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82043  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82044  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82045  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82046  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82047  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82048  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82049  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82050  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82051  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82052  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82053  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82054  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82055  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82056  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      82057  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82058  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82059  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82060  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82061  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82069  82061  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:24:59 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:24:59 [WARNING] 24个进程全部启动成功
+2021-11-24 18:24:59 [WARNING] 检查ftp应用安全策略是否下发成功
+2021-11-24 18:24:59 [WARNING] 查询命令为：cat /etc/jsac/ftp.json
+2021-11-24 18:24:59 [WARNING] 预期包含内容：106
+2021-11-24 18:24:59 [WARNING] 查询ftp.json命令返回值：
+[{
+    "AppId":  5,
+    "AppRules":  [{
+        "RuleId":  106,
+        "Action":  "Deny",
+        "DownloadExt":  ["pdf", "xls"]
+      }]
+  }]
+
+2021-11-24 18:24:59 [WARNING] *******已经成功连接'192.168.30.47'服务器FTP服务！！！
+2021-11-24 18:24:59 [WARNING] ftp登录成功
+2021-11-24 18:24:59 [WARNING] 欢迎语是：220 (vsFTPd 3.0.2)
+2021-11-24 18:24:59 [WARNING] Error:
+2021-11-24 18:24:59 [WARNING] ftp下载文件扩展名pdf为第一个黑名单结果为:0
+2021-11-24 18:24:59 [WARNING] *******已经成功连接'192.168.30.47'服务器FTP服务！！！
+2021-11-24 18:24:59 [WARNING] ftp登录成功
+2021-11-24 18:24:59 [WARNING] 欢迎语是：220 (vsFTPd 3.0.2)
+2021-11-24 18:24:59 [WARNING] Error:
+2021-11-24 18:24:59 [WARNING] ftp下载文件扩展名xls为第二个黑名单结果为:0
+2021-11-24 18:24:59 [WARNING] *******已经成功连接'192.168.30.47'服务器FTP服务！！！
+2021-11-24 18:24:59 [WARNING] ftp登录成功
+2021-11-24 18:24:59 [WARNING] 欢迎语是：220 (vsFTPd 3.0.2)
+2021-11-24 18:24:59 [WARNING] 下载文件扩展名txt为非黑名单结果为:1
+2021-11-24 18:24:59 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:24:59 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:24:59 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:24:59 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:24:59 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:36 nginx: master process /usr/local/nginx/sbin/nginx
+root      82037  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82038  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82039  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82040  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82041  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82042  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82043  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82044  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82045  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82046  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82047  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82048  76372  0 18:24 ?        00:00:00 nginx: worker process
+root      82049  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82050  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82051  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      82052  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82053  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82054  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82055  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82056  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      82057  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      82058  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82059  76372  2 18:24 ?        00:00:00 nginx: worker process
+root      82060  76372  1 18:24 ?        00:00:00 nginx: worker process
+root      82090  79970  0 18:25 ?        00:00:00 systemctl reload nginx_kernel
+root      82091      1  0 18:25 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      82092  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82100  82092  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:04 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:25:05 [WARNING] 这是进程的第1次等待
+2021-11-24 18:25:05 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      82059  76372  1 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      82105  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82106  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82107  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82108  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82109  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82110  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82111  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82112  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82113  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82114  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82115  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82116  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82117  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82118  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82119  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82120  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82121  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82122  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82123  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82124  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82125  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82126  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82127  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82128  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82129  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82137  82129  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:05 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:25:05 [WARNING] 24个进程全部启动成功
+2021-11-24 18:25:05 [WARNING] 检查网页安全浏览策略是否清空
+2021-11-24 18:25:05 [WARNING] 查询命令为：cat /etc/jsac/ftp.json
+2021-11-24 18:25:05 [WARNING] 预期不包含内容：106
+2021-11-24 18:25:05 [WARNING] 查询ftp.json命令返回值：
+[]
+
+2021-11-24 18:25:05 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:25:05 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:25:05 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:25:05 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:25:05 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      82059  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      82105  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82106  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82107  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82108  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82109  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82110  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82111  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82112  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82113  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82114  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82115  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82116  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82117  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82118  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82119  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82120  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82121  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82122  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82123  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82124  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82125  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82126  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82127  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82128  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82156  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82167  82156  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:10 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:25:10 [WARNING] 这是进程的第1次等待
+2021-11-24 18:25:10 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:41 nginx: master process /usr/local/nginx/sbin/nginx
+root      82059  76372  0 18:24 ?        00:00:00 nginx: worker process is shutting down
+root      82172  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82173  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82174  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82175  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82176  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82177  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82178  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82179  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82180  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82181  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82182  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82183  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82184  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82185  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82186  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82187  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82188  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82189  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82190  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82191  76372  2 18:25 ?        00:00:00 nginx: worker process
+root      82192  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82193  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82194  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82195  76372  3 18:25 ?        00:00:00 nginx: worker process
+root      82196  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82204  82196  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:10 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:25:10 [WARNING] 24个进程全部启动成功
+2021-11-24 18:25:10 [WARNING] 检查代理端口是否监听
+2021-11-24 18:25:10 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:25:10 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:25:10 [WARNING] 预期不包含内容：192.168.30.47:2121
+2021-11-24 18:25:10 [WARNING] 端口监听检查通过
+2021-11-24 18:25:10 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:25:10 [WARNING] 查询命令为：cat /etc/jsac/other_proxy/5_2121_ftp.stream
+2021-11-24 18:25:10 [WARNING] 检查内容为：192.168.30.47:2121
+2021-11-24 18:25:10 [WARNING] 代理文件内容为：
+
+2021-11-24 18:25:10 [WARNING] 代理文件检查通过
+2021-11-24 18:25:10 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:25:10 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:25:10 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:25:10 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:25:10 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  1 16:38 ?        00:01:41 nginx: master process /usr/local/nginx/sbin/nginx
+root      82059  76372  1 18:24 ?        00:00:00 [nginx]
+root      82172  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82173  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82174  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82175  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82176  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82177  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82178  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82179  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82180  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82181  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82182  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82183  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82184  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82185  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82186  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82187  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82188  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82189  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82190  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82191  76372  2 18:25 ?        00:00:00 nginx: worker process
+root      82192  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82193  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82194  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82195  76372  3 18:25 ?        00:00:00 nginx: worker process
+root      82232  79970  0 18:25 ?        00:00:00 systemctl reload nginx_kernel
+root      82233      1  0 18:25 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      82234  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82242  82234  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:15 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:25:15 [WARNING] 这是进程的第1次等待
+2021-11-24 18:25:15 [WARNING] 检查nginx的worker进程数：
+root      76372      1  1 16:38 ?        00:01:43 nginx: master process /usr/local/nginx/sbin/nginx
+root      82244  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82245  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82246  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82247  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82248  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82249  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82250  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82251  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82252  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82253  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82254  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82255  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82256  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82257  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82258  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82259  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82260  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82261  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82262  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82263  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82264  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82265  76372  0 18:25 ?        00:00:00 nginx: worker process
+root      82266  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82267  76372  1 18:25 ?        00:00:00 nginx: worker process
+root      82268  81246  0 18:25 ?        00:00:00 bash -c ps -ef |grep nginx
+root      82276  82268  0 18:25 ?        00:00:00 grep nginx
+
+2021-11-24 18:25:15 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:25:15 [WARNING] 24个进程全部启动成功
+2021-11-24 18:25:15 [WARNING] =========================== data_check_teardown_met 结束 耗时：5.349755048751831s ==================================
+2021-11-24 18:25:15 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --switch on
+2021-11-24 18:25:16 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf  --action forward
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --selabel on
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --cycle 15
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4aclcycle 30
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --domain off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --netflow off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4acl off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --syncookie off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --ckoption off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --noflow off
+2021-11-24 18:25:16 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:16 [WARNING] clear_env_cmd:export cardid=0&&defconf --droperr off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=0&&defconf --tcpmss 0
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --switch on
+2021-11-24 18:25:17 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf  --action forward
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf --selabel on
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf --cycle 15
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4aclcycle 30
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf --domain off
+2021-11-24 18:25:17 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:17 [WARNING] clear_env_cmd:export cardid=1&&defconf --netflow off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4acl off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --syncookie off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --ckoption off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --noflow off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --droperr off
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] clear_env_cmd:export cardid=1&&defconf --tcpmss 0
+2021-11-24 18:25:18 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:25:18 [WARNING] =========================== clear_env 结束 耗时：2.5506198406219482s ==================================
+2021-11-24 18:25:18 [WARNING] Rabbitmq连接: 10.10.101.233:5672 已断开.
+2021-11-24 18:25:18 [WARNING] Command done, closing SSH connection
+2021-11-24 18:25:18 [WARNING] 
+ start----------------------------------------------------------------------------------------------------
+2021-11-24 18:25:18 [WARNING] 
+result: test_ftp_check_download_a2 -- passed
+2021-11-24 18:25:18 [WARNING] 
+ end----------------------------------------------------------------------------------------------------

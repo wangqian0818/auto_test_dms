@@ -1,0 +1,9 @@
+
+--------------------------------------- 第170行策略执行情况 --------------------------------------- 
+策略内容：[{'Action': 'deny', 'AttachmentExt': ['txt', 'pdf'], 'FromTo': ['autotest_send@jusontech.com', 'autotest_recv@jusontech.com'], 'Subject': ['123456'], 'RuleId': 104}, {'Action': 'deny', 'Subject': ['abc', '卓讯'], 'RuleId': 105}]
+检查策略内容的方式为：['POP3', 'From:autotest_recv2@jusontech.com', 'To:autotest_send2@jusontech.com', 'AttachmentExt:txt', 'Subject:123456']
+预期结果为：放行
+实际执行返回码为：1
+执行结果为：success
+
+

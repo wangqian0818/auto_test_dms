@@ -1,0 +1,1973 @@
+2021-11-24 18:39:03 [WARNING] E:/TempData/d_auto_test/auto_test_dms/Case_rbm/http_check_get
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.47完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.148完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.149完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.100.1完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.88.53完成!
+2021-11-24 18:39:03 [WARNING] <ConnectionParameters host=10.10.101.233 port=5672 virtual_host=/ ssl=False>
+2021-11-24 18:39:03 [WARNING] Rabbitmq初始化完成: 10.10.101.233:5672
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.111完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.112完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.180完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.101.26完成!
+2021-11-24 18:39:03 [WARNING] ssh初始化: 10.10.100.201完成!
+2021-11-24 18:39:03 [WARNING] base_path: E:/TempData/d_auto_test
+2021-11-24 18:39:03 [WARNING] ssh 连接开始
+2021-11-24 18:39:03 [WARNING] ssh连接主机：10.10.101.47  完成!
+2021-11-24 18:39:03 [WARNING] ssh服务器: 10.10.101.47连接成功
+2021-11-24 18:39:03 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --switch on
+2021-11-24 18:39:04 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf  --action forward
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --selabel on
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --cycle 15
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4aclcycle 30
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --domain off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --netflow off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4acl off
+2021-11-24 18:39:04 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:04 [WARNING] clear_env_cmd:export cardid=0&&defconf --syncookie off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=0&&defconf --ckoption off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=0&&defconf --noflow off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=0&&defconf --droperr off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=0&&defconf --tcpmss 0
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --switch on
+2021-11-24 18:39:05 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:39:05 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&defconf  --action forward
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&defconf --selabel on
+2021-11-24 18:39:05 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:05 [WARNING] clear_env_cmd:export cardid=1&&defconf --cycle 15
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4aclcycle 30
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --domain off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --netflow off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4acl off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --syncookie off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --ckoption off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --noflow off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --droperr off
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] clear_env_cmd:export cardid=1&&defconf --tcpmss 0
+2021-11-24 18:39:06 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:39:06 [WARNING] =========================== clear_env 结束 耗时：2.7806644439697266s ==================================
+2021-11-24 18:39:06 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:39:06 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85349  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85357  85349  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:12 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:12 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85358  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85366  85358  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:12 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:12 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:12 [WARNING] =========================== data_check_setup_met 结束 耗时：5.363348722457886s ==================================
+2021-11-24 18:39:12 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:39:12 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:39:12 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:39:12 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:39:12 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85380  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85381  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85384      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85390  85380  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:17 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:39:17 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:17 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      85394  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85395  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85396  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85397  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85398  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85399  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85400  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85401  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85402  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85403  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85404  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85405  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85406  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85407  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85408  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85409  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85410  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85411  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85412  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85413  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85414  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85415  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85416  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85417  76372  4 18:39 ?        00:00:00 nginx: worker process
+root      85419  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85427  85419  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:17 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:17 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:17 [WARNING] 检查代理端口是否监听
+2021-11-24 18:39:17 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:39:17 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:39:17 [WARNING] 预期包含内容：192.168.30.47:2287
+2021-11-24 18:39:17 [WARNING] 端口监听检查通过
+2021-11-24 18:39:17 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:39:17 [WARNING] 查询命令为：cat /etc/jsac/http_proxy/1_2287_http.stream
+2021-11-24 18:39:17 [WARNING] 检查内容为：192.168.30.47:2287
+2021-11-24 18:39:17 [WARNING] 代理文件内容为：
+upstream 192.168.30.47-2287-http {
+	server 10.10.100.201:80;
+}
+server {
+	listen 192.168.30.47:2287;
+	app_id 1;
+	server_name localhost;
+
+	location / {
+		proxy_pass http://192.168.30.47-2287-http;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-Port $remote_port;
+	}
+}
+
+2021-11-24 18:39:17 [WARNING] 代理文件检查通过
+2021-11-24 18:39:17 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:39:17 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:39:17 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:39:17 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:39:17 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      85394  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85395  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85396  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85397  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85398  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85399  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85400  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85401  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85402  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85403  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85404  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85405  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85406  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85407  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85408  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85409  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85410  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85411  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85412  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85413  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85414  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85415  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85416  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85417  76372  4 18:39 ?        00:00:00 nginx: worker process
+root      85455  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85456      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85457  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85465  85457  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:22 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:39:22 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:23 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:40 nginx: master process /usr/local/nginx/sbin/nginx
+root      85467  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85468  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85469  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85470  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85471  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85472  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85473  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85474  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85475  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85476  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85477  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85478  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85479  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85480  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85481  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85482  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85483  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85484  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85485  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85486  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85487  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85488  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85489  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85490  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85491  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85499  85491  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:23 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:23 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:23 [WARNING] 检查网页应用安全策略是否下发成功
+2021-11-24 18:39:23 [WARNING] 查询命令为：cat /etc/jsac/http.json
+2021-11-24 18:39:23 [WARNING] 预期包含内容：100
+2021-11-24 18:39:23 [WARNING] 查询http.json命令返回值：
+[{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pcap"]
+      }]
+  }]
+
+2021-11-24 18:39:43 [WARNING] get请求超时
+2021-11-24 18:39:43 [WARNING] get普通请求的请求内容为：0
+2021-11-24 18:39:43 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:39:43 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:39:43 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:39:43 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:39:43 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:40 nginx: master process /usr/local/nginx/sbin/nginx
+root      85467  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85468  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85469  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85470  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85471  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85472  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85473  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85474  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85475  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85476  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85477  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85478  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85479  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85480  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85481  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85482  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85483  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85484  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85485  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85486  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85487  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85488  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85489  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85490  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85522  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85530  85522  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:48 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:39:48 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:48 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85558  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85566  85558  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:48 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:48 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:48 [WARNING] =========================== data_check_teardown_met 结束 耗时：5.2970967292785645s ==================================
+2021-11-24 18:39:48 [WARNING] 
+ start----------------------------------------------------------------------------------------------------
+2021-11-24 18:39:48 [WARNING] 
+result: test_http_check_get_a1 -- failed
+2021-11-24 18:39:48 [WARNING] 
+ end----------------------------------------------------------------------------------------------------
+2021-11-24 18:39:48 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:39:48 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85576  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85584  85576  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:53 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:53 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85585  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85593  85585  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:53 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:53 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:53 [WARNING] =========================== data_check_setup_met 结束 耗时：5.279397487640381s ==================================
+2021-11-24 18:39:53 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:39:53 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:39:53 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:39:53 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:39:53 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85607  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85614  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85616  85607  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:58 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:39:58 [WARNING] 这是进程的第1次等待
+2021-11-24 18:39:58 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:45 nginx: master process /usr/local/nginx/sbin/nginx
+root      85621  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85622  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85623  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85624  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85625  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85626  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85627  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85628  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85629  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85630  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85631  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85632  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85633  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85634  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85635  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85636  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85637  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85638  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85639  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85640  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85641  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85642  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85643  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85644  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85645  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85653  85645  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:39:58 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:39:58 [WARNING] 24个进程全部启动成功
+2021-11-24 18:39:58 [WARNING] 检查代理端口是否监听
+2021-11-24 18:39:58 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:39:59 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+2021-11-24 18:39:59 [WARNING] 预期包含内容：192.168.30.47:2287
+2021-11-24 18:39:59 [WARNING] 端口监听检查通过
+2021-11-24 18:39:59 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:39:59 [WARNING] 查询命令为：cat /etc/jsac/http_proxy/1_2287_http.stream
+2021-11-24 18:39:59 [WARNING] 检查内容为：192.168.30.47:2287
+2021-11-24 18:39:59 [WARNING] 代理文件内容为：
+upstream 192.168.30.47-2287-http {
+	server 10.10.100.201:80;
+}
+server {
+	listen 192.168.30.47:2287;
+	app_id 1;
+	server_name localhost;
+
+	location / {
+		proxy_pass http://192.168.30.47-2287-http;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-Port $remote_port;
+	}
+}
+
+2021-11-24 18:39:59 [WARNING] 代理文件检查通过
+2021-11-24 18:39:59 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:39:59 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:39:59 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:39:59 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:39:59 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:45 nginx: master process /usr/local/nginx/sbin/nginx
+root      85621  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85622  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85623  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85624  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85625  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85626  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85627  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85628  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85629  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85630  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85631  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85632  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85633  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85634  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85635  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85636  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85637  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85638  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85639  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85640  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85641  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85642  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85643  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85644  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85681  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85682      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85683  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85691  85683  0 18:39 ?        00:00:00 grep nginx
+
+2021-11-24 18:40:04 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:40:04 [WARNING] 这是进程的第1次等待
+2021-11-24 18:40:04 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:47 nginx: master process /usr/local/nginx/sbin/nginx
+root      85702  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85703  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85704  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85705  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85706  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85707  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85708  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85709  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85710  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85711  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85712  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85713  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85714  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85715  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85716  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85717  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85718  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85719  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85720  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85721  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85722  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85723  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85724  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85725  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85726  85066  0 18:40 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85734  85726  0 18:40 ?        00:00:00 grep nginx
+
+2021-11-24 18:40:04 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:40:04 [WARNING] 24个进程全部启动成功
+2021-11-24 18:40:04 [WARNING] 检查网页安全浏览策略是否下发成功
+2021-11-24 18:40:04 [WARNING] 查询命令为：cat /etc/jsac/http.json
+2021-11-24 18:40:04 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:04 [WARNING] 这是进程的第1次等待
+2021-11-24 18:40:04 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:04 [WARNING] 这是进程的第2次等待
+2021-11-24 18:40:04 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:04 [WARNING] 这是进程的第3次等待
+2021-11-24 18:40:04 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:04 [WARNING] 这是进程的第4次等待
+2021-11-24 18:40:04 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第5次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第6次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第7次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第8次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第9次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第10次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第11次等待
+2021-11-24 18:40:05 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:05 [WARNING] 这是进程的第12次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第13次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第14次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第15次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第16次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第17次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第18次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:06 [WARNING] 这是进程的第19次等待
+2021-11-24 18:40:06 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第20次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第21次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第22次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第23次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第24次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第25次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:07 [WARNING] 这是进程的第26次等待
+2021-11-24 18:40:07 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第27次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第28次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第29次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第30次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第31次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第32次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第33次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:08 [WARNING] 这是进程的第34次等待
+2021-11-24 18:40:08 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第35次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第36次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第37次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第38次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第39次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第40次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:09 [WARNING] 这是进程的第41次等待
+2021-11-24 18:40:09 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第42次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第43次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第44次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第45次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第46次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第47次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第48次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:10 [WARNING] 这是进程的第49次等待
+2021-11-24 18:40:10 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第50次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第51次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第52次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第53次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第54次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第55次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第56次等待
+2021-11-24 18:40:11 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:11 [WARNING] 这是进程的第57次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第58次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第59次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第60次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第61次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第62次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第63次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:12 [WARNING] 这是进程的第64次等待
+2021-11-24 18:40:12 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第65次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第66次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第67次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第68次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第69次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第70次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第71次等待
+2021-11-24 18:40:13 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:13 [WARNING] 这是进程的第72次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第73次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第74次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第75次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第76次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第77次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第78次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:14 [WARNING] 这是进程的第79次等待
+2021-11-24 18:40:14 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第80次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第81次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第82次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第83次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第84次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第85次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第86次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:15 [WARNING] 这是进程的第87次等待
+2021-11-24 18:40:15 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第88次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第89次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第90次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第91次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第92次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第93次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第94次等待
+2021-11-24 18:40:16 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:16 [WARNING] 这是进程的第95次等待
+2021-11-24 18:40:17 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:17 [WARNING] 这是进程的第96次等待
+2021-11-24 18:40:17 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:17 [WARNING] 这是进程的第97次等待
+2021-11-24 18:40:17 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:17 [WARNING] 这是进程的第98次等待
+2021-11-24 18:40:17 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:17 [WARNING] 这是进程的第99次等待
+2021-11-24 18:40:17 [WARNING] [{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:17 [WARNING] 这是进程的第100次等待
+2021-11-24 18:40:17 [WARNING] 进程检查结果失败
+2021-11-24 18:40:17 [WARNING] 预期包含内容：100
+2021-11-24 18:40:17 [WARNING] 查询http.json命令返回值：
+[{
+    "AppId":  1,
+    "AppRules":  [{
+        "RuleId":  100,
+        "Action":  "Deny",
+        "Method":  ["GET"],
+        "Parameter":  ["pdf", "js"]
+      }]
+  }]
+
+2021-11-24 18:40:37 [WARNING] get请求超时
+2021-11-24 18:40:37 [WARNING] 多个黑名单时get普通请求的请求内容为：0
+2021-11-24 18:40:37 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:40:37 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:40:37 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+2021-11-24 18:40:37 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:40:37 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:47 nginx: master process /usr/local/nginx/sbin/nginx
+root      85702  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85703  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85704  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85705  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85706  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85707  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85708  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85709  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85710  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85711  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85712  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85713  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85714  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85715  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85716  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85717  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85718  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85719  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85720  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85721  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85722  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85723  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85724  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85725  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86454  79970  0 18:40 ?        00:00:00 sh -c ps -ef | grep /usr/local/nginx/sbin/nginx | grep -qv grep
+root      86455  85066  0 18:40 ?        00:00:00 bash -c ps -ef |grep nginx
+root      86457  86454  0 18:40 ?        00:00:00 grep /usr/local/nginx/sbin/nginx
+root      86466  86455  0 18:40 ?        00:00:00 grep nginx
+
+2021-11-24 18:40:42 [WARNING] Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:40:42 [WARNING] 这是进程的第1次等待
+2021-11-24 18:40:43 [WARNING] 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:50 nginx: master process /usr/local/nginx/sbin/nginx
+root      86470  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86471  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86472  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86473  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86474  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86475  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86476  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86477  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86478  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86479  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86480  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86481  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      86482  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86483  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86484  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86485  76372  2 18:40 ?        00:00:00 nginx: worker process
+root      86486  76372  2 18:40 ?        00:00:00 nginx: worker process
+root      86487  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86488  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86489  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86490  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86491  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      86492  76372  3 18:40 ?        00:00:00 nginx: worker process
+root      86493  76372  3 18:40 ?        00:00:00 nginx: worker process
+root      86494  85066  0 18:40 ?        00:00:00 bash -c ps -ef |grep nginx
+root      86502  86494  0 18:40 ?        00:00:00 grep nginx
+
+2021-11-24 18:40:43 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:40:43 [WARNING] 24个进程全部启动成功
+2021-11-24 18:40:43 [WARNING] =========================== data_check_teardown_met 结束 耗时：5.301368236541748s ==================================
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --switch on
+2021-11-24 18:40:43 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf  --action forward
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --selabel on
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --cycle 15
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4aclcycle 30
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --domain off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --netflow off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --ipv4acl off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --syncookie off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --ckoption off
+2021-11-24 18:40:43 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:43 [WARNING] clear_env_cmd:export cardid=0&&defconf --noflow off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=0&&defconf --droperr off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=0&&defconf --tcpmss 0
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --switch on
+2021-11-24 18:40:44 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 12 --switch off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 13 --switch off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 15 --switch off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&switch-jsac --set --module 16 --switch off
+2021-11-24 18:40:44 [WARNING] clear_env_result:Set successfully.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&defconf  --action forward
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&defconf --selabel on
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&defconf --cycle 15
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4aclcycle 30
+2021-11-24 18:40:44 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:44 [WARNING] clear_env_cmd:export cardid=1&&defconf --domain off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --netflow off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --ipv4acl off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --syncookie off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --ckoption off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --noflow off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --droperr off
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] clear_env_cmd:export cardid=1&&defconf --tcpmss 0
+2021-11-24 18:40:45 [WARNING] clear_env_result:Success.
+
+2021-11-24 18:40:45 [WARNING] =========================== clear_env 结束 耗时：2.6638495922088623s ==================================
+2021-11-24 18:40:45 [WARNING] Rabbitmq连接: 10.10.101.233:5672 已断开.
+2021-11-24 18:40:45 [WARNING] Command done, closing SSH connection
+2021-11-24 18:40:45 [WARNING] 
+ start----------------------------------------------------------------------------------------------------
+2021-11-24 18:40:45 [WARNING] 
+result: test_http_check_get_a2 -- failed
+2021-11-24 18:40:45 [WARNING] 
+ end----------------------------------------------------------------------------------------------------

@@ -1,0 +1,9 @@
+1.想测试哪个case目录下的单元测试,就把单元测试的文件夹名写到caseselect.py文件中,一个文件夹对应一行
+
+2.ssh.py对应的是ssh连接调用接口
+
+3.rabbitmq.py对应的是Rabbitmq调用接口
+
+4.packet.py对应的是抓包调用接口
+
+5.baseinfo.py对应的是版本号设置

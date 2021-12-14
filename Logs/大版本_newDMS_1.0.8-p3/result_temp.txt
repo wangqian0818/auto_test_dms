@@ -1,0 +1,7 @@
+
+--------------------- 开始执行 case：E:/TempData/d_auto_test/auto_test_dms/Case_rbm/iso_ftp_check_cmd/function.py
+result: test_iso_ftp_check_delete_a1 -- failed		20211126_17-31-02
+result: test_iso_ftp_check_delete_a2 -- skipped		20211126_17-31-02
+--------------------- 执行结束 case：E:/TempData/d_auto_test/auto_test_dms/Case_rbm/iso_ftp_check_cmd/function.py
+
+

@@ -1,0 +1,1153 @@
+2021-11-24 18:52:53 [WARNING] E:/TempData/d_auto_test/auto_test_dms/Case_rbm/iso_http_redirect
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.47完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.148完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.149完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.100.1完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.88.53完成!
+2021-11-24 18:52:53 [WARNING] <ConnectionParameters host=10.10.101.233 port=5672 virtual_host=/ ssl=False>
+2021-11-24 18:52:53 [WARNING] Rabbitmq初始化完成: 10.10.101.233:5672
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.111完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.112完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.180完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.101.26完成!
+2021-11-24 18:52:53 [WARNING] ssh初始化: 10.10.100.201完成!
+2021-11-24 18:52:53 [WARNING] base_path: E:/TempData/d_auto_test
+2021-11-24 18:52:53 [WARNING] ssh 连接开始
+2021-11-24 18:52:53 [WARNING] ssh连接主机：10.10.101.111  完成!
+2021-11-24 18:52:53 [WARNING] ssh服务器: 10.10.101.111连接成功
+2021-11-24 18:52:53 [WARNING] ssh 连接开始
+2021-11-24 18:52:54 [WARNING] ssh连接主机：10.10.101.112  完成!
+2021-11-24 18:52:54 [WARNING] ssh服务器: 10.10.101.112连接成功
+2021-11-24 18:52:54 [WARNING] ssh 连接开始
+2021-11-24 18:52:54 [WARNING] ssh连接主机：10.10.101.26  完成!
+2021-11-24 18:52:54 [WARNING] ssh服务器: 10.10.101.26连接成功
+2021-11-24 18:52:54 [WARNING] ssh 连接开始
+2021-11-24 18:52:55 [WARNING] ssh连接主机：10.10.101.180  完成!
+2021-11-24 18:52:55 [WARNING] ssh服务器: 10.10.101.180连接成功
+2021-11-24 18:52:55 [WARNING] ssh 连接开始
+2021-11-24 18:53:16 [WARNING] 连接 10.10.100.201 失败: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] =========================== 设备FrontDutiso_setup_class 结束 耗时：0.25467610359191895s ==================================
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:16 [WARNING] =========================== 设备BackDutiso_setup_class 结束 耗时：0.3124251365661621s ==================================
+2021-11-24 18:53:16 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:53:17 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350866 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350874 350866  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:22 [WARNING] 这是进程的第1次等待
+2021-11-24 18:53:22 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350875 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350883 350875  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:22 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:53:22 [WARNING] 24个进程全部启动成功
+2021-11-24 18:53:22 [WARNING] =========================== data_check_setup_met 结束 耗时：5.268920183181763s ==================================
+2021-11-24 18:53:22 [WARNING] 查询命令为：ps -ef |grep agentjsac
+2021-11-24 18:53:22 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      28973      1  0 Nov19 ?        00:40:08 nginx: master process /usr/local/nginx/sbin/nginx
+root     187901  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187902  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187903  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187904  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187905  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187906  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187907  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187908  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187909  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187911  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187920  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187930  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187931  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187932  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187933  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187934  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187935  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187956  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187957  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187958  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187959  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187960  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187961  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187962  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     188135 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188143 188135  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:27 [WARNING] 这是进程的第1次等待
+2021-11-24 18:53:27 [WARNING] 检查nginx的worker进程数：
+root      28973      1  0 Nov19 ?        00:40:08 nginx: master process /usr/local/nginx/sbin/nginx
+root     187901  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187902  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187903  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187904  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187905  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187906  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187907  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187908  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187909  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187911  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187920  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187930  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187931  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187932  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187933  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187934  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187935  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187956  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187957  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187958  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187959  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187960  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187961  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187962  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     188149 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188157 188149  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:27 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:53:27 [WARNING] 24个进程全部启动成功
+2021-11-24 18:53:27 [WARNING] =========================== data_check_setup_met 结束 耗时：5.319084167480469s ==================================
+2021-11-24 18:53:27 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:53:27 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:53:27 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222的Rabbitmq信息接收线程已开启!
+2021-11-24 18:53:27 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:53:27 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:33 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350901 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350909 350901  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:32 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:53:32 [WARNING] 这是前置机nginx进程的第1次等待
+2021-11-24 18:53:32 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350919 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350937 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350945 350937  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:32 [WARNING] 当前有42个前置机nginx进程启动成功
+2021-11-24 18:53:32 [WARNING] 这是前置机nginx进程的第2次等待
+2021-11-24 18:53:33 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350919 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  4 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350946 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350947 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350948 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350956 350948  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:33 [WARNING] 当前有44个前置机nginx进程启动成功
+2021-11-24 18:53:33 [WARNING] 这是前置机nginx进程的第3次等待
+2021-11-24 18:53:33 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350630 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350631 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350632 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350633 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350634 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350635 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350637 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350638 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350639 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350640 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350641 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350642 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350643 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350644 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350645 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350646 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350648 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350650 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350651 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350652 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350653 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350654 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350664 270949  0 18:52 ?        00:00:00 nginx: worker process
+root     350919 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350946 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350947 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350957 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350958 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350959 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350967 350959  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:33 [WARNING] 当前有46个前置机nginx进程启动成功
+2021-11-24 18:53:33 [WARNING] 这是前置机nginx进程的第4次等待
+2021-11-24 18:53:33 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:37 nginx: master process /usr/local/nginx/sbin/nginx
+root     350629 270949  0 18:52 ?        00:00:00 [nginx]
+root     350630 270949  0 18:52 ?        00:00:00 [nginx]
+root     350631 270949  0 18:52 ?        00:00:00 [nginx]
+root     350632 270949  0 18:52 ?        00:00:00 [nginx]
+root     350633 270949  0 18:52 ?        00:00:00 [nginx]
+root     350634 270949  0 18:52 ?        00:00:00 [nginx]
+root     350635 270949  0 18:52 ?        00:00:00 [nginx]
+root     350637 270949  0 18:52 ?        00:00:00 [nginx]
+root     350638 270949  0 18:52 ?        00:00:00 [nginx]
+root     350639 270949  0 18:52 ?        00:00:00 [nginx]
+root     350640 270949  0 18:52 ?        00:00:00 [nginx]
+root     350641 270949  0 18:52 ?        00:00:00 [nginx]
+root     350642 270949  0 18:52 ?        00:00:00 [nginx]
+root     350643 270949  0 18:52 ?        00:00:00 [nginx]
+root     350644 270949  0 18:52 ?        00:00:00 [nginx]
+root     350645 270949  0 18:52 ?        00:00:00 [nginx]
+root     350646 270949  0 18:52 ?        00:00:00 [nginx]
+root     350648 270949  0 18:52 ?        00:00:00 [nginx]
+root     350650 270949  0 18:52 ?        00:00:00 [nginx]
+root     350651 270949  0 18:52 ?        00:00:00 [nginx]
+root     350652 270949  0 18:52 ?        00:00:00 [nginx]
+root     350653 270949  0 18:52 ?        00:00:00 [nginx]
+root     350654 270949  0 18:52 ?        00:00:00 [nginx]
+root     350664 270949  0 18:52 ?        00:00:00 [nginx]
+root     350919 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350946 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350947 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350957 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350958 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     350968 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350969 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350970 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     350978 350970  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:33 [WARNING] 当前有24个前置机nginx进程启动成功
+2021-11-24 18:53:33 [WARNING] 24个前置机nginx进程全部启动成功
+2021-11-24 18:53:33 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:53:34 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      28973      1  0 Nov19 ?        00:40:12 nginx: master process /usr/local/nginx/sbin/nginx
+root     187901  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187902  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187903  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187904  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187905  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187906  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187907  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187908  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187909  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187911  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187920  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187930  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187931  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187932  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187933  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187934  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187935  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187956  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187957  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187958  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187959  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187960  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187961  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187962  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     188167  28973  3 18:53 ?        00:00:00 nginx: worker process
+root     188168  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188169  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188170  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188171  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188172  28973  4 18:53 ?        00:00:00 nginx: worker process
+root     188182  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188183 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188191 188183  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:39 [WARNING] 这是后置机nginx进程的第1次等待
+2021-11-24 18:53:39 [WARNING] 检查nginx的worker进程数：
+root      28973      1  0 Nov19 ?        00:40:17 nginx: master process /usr/local/nginx/sbin/nginx
+root     187901  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187902  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187903  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187904  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187905  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187906  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187907  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187908  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187909  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187911  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187920  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187930  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187931  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187932  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187933  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187934  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187935  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187956  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187957  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187958  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187959  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187960  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187961  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     187962  28973  0 18:52 ?        00:00:00 nginx: worker process
+root     188167  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188168  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188169  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188170  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188171  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188172  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188182  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188192  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188193  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188194  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188195  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188196  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188197  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188198  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188199  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188200  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188201  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188202  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188203  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188204  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188205  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188206  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188207  28973  4 18:53 ?        00:00:00 nginx: worker process
+root     188208 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188216 188208  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:39 [WARNING] 当前有47个后置机nginx进程启动成功
+2021-11-24 18:53:39 [WARNING] 这是后置机nginx进程的第2次等待
+2021-11-24 18:53:39 [WARNING] 检查nginx的worker进程数：
+root      28973      1  0 Nov19 ?        00:40:18 nginx: master process /usr/local/nginx/sbin/nginx
+root     187901  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187902  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187903  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187904  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187905  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187906  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187907  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187908  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187909  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187911  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187920  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187930  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187931  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187932  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187933  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187934  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187935  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187956  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187957  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187958  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187959  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187960  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187961  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     187962  28973  0 18:52 ?        00:00:00 nginx: worker process is shutting down
+root     188167  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188168  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188169  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188170  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188171  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188172  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188182  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188192  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188193  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188194  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188195  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188196  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188197  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188198  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188199  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188200  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188201  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188202  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188203  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188204  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188205  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188206  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188207  28973  4 18:53 ?        00:00:00 nginx: worker process
+root     188217  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188218 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188226 188218  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:39 [WARNING] 当前有24个后置机nginx进程启动成功
+2021-11-24 18:53:39 [WARNING] 24个后置机nginx进程全部启动成功
+2021-11-24 18:53:39 [WARNING] 检查代理端口是否监听
+2021-11-24 18:53:39 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:53:39 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.111:2287     0.0.0.0:*               LISTEN      270949/nginx: maste 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      13553/sshd: /usr/sb 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      14034/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      13527/zabbix_agentd 
+tcp6       0      0 :::22                   :::*                    LISTEN      13553/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      14034/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      13527/zabbix_agentd 
+
+2021-11-24 18:53:39 [WARNING] 预期包含内容：192.168.30.111:2287
+2021-11-24 18:53:39 [WARNING] 端口监听检查通过
+2021-11-24 18:53:39 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:53:39 [WARNING] 查询命令为：cat /etc/jsac/http_proxy/1_65_http.stream
+2021-11-24 18:53:39 [WARNING] 检查内容为：192.168.30.111:2287
+2021-11-24 18:53:39 [WARNING] 代理文件内容为：
+upstream 0-A-tcp-2287 {
+	server unix:/run/jsacp/socks/APP1.listen.sock0 max_fails=50 fail_timeout=30;
+}
+server {
+	listen 192.168.30.111:2287;
+	app_id 1;
+	server_name localhost;
+
+	#charset koi8-r;
+
+	#access_log logs/host.access.log main;
+
+	location / {
+		root html;
+		index index.html index.htm;
+		proxy_pass http://0-A-tcp-2287;
+		#proxy_bind $remote_addr:$remote_port transparent;
+		proxy_set_header X-Real-IP $remote_addr;
+		#proxy_redirect off;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-Port $remote_port;
+		#proxy_set_header X-ForWarded-For $proxy_add_x_forwarded_for:$remote_port;
+		#proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;
+	}
+
+	#error_page 404 /404.html;
+	# redirect server error pages to the static page /50x.html
+
+	error_page   500 502 503 504  /50x.html;
+	location = /50x.html {
+		root html;
+	}
+}
+
+2021-11-24 18:53:39 [WARNING] 代理文件检查通过
+2021-11-24 18:53:39 [WARNING] 请求地址为http://192.168.30.111:2287
+2021-11-24 18:53:42 [WARNING] 验证隔离下的http策略请求状态码为：200
+2021-11-24 18:53:42 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:53:42 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:53:42 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222的Rabbitmq信息接收线程已开启!
+2021-11-24 18:53:42 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:53:42 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:37 nginx: master process /usr/local/nginx/sbin/nginx
+root     350919 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350946 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350947 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350957 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350958 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350968 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350969 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351010 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351018 351010  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:47 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:53:48 [WARNING] 这是前置机nginx进程的第1次等待
+2021-11-24 18:53:48 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     350919 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350920 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350921 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350922 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350923 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350924 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350925 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350926 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350927 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350928 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350929 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350930 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350931 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350932 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350933 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350934 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350935 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350936 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350946 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350947 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350957 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350958 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350968 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     350969 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351029 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351030 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351031 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351032 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     351033 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     351034 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351035 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351036 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351037 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351038 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351039 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351040 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351041 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351042 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351043 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351044 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351045 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351046 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351047 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351048 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351049 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351051 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351052 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351053 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351054 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351062 351054  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:48 [WARNING] 当前有48个前置机nginx进程启动成功
+2021-11-24 18:53:48 [WARNING] 这是前置机nginx进程的第2次等待
+2021-11-24 18:53:48 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     350919 270949  0 18:53 ?        00:00:00 [nginx]
+root     350920 270949  0 18:53 ?        00:00:00 [nginx]
+root     350921 270949  0 18:53 ?        00:00:00 [nginx]
+root     350922 270949  0 18:53 ?        00:00:00 [nginx]
+root     350923 270949  0 18:53 ?        00:00:00 [nginx]
+root     350924 270949  0 18:53 ?        00:00:00 [nginx]
+root     350925 270949  0 18:53 ?        00:00:00 [nginx]
+root     350926 270949  1 18:53 ?        00:00:00 [nginx]
+root     350927 270949  0 18:53 ?        00:00:00 [nginx]
+root     350928 270949  0 18:53 ?        00:00:00 [nginx]
+root     350929 270949  0 18:53 ?        00:00:00 [nginx]
+root     350930 270949  0 18:53 ?        00:00:00 [nginx]
+root     350931 270949  0 18:53 ?        00:00:00 [nginx]
+root     350932 270949  0 18:53 ?        00:00:00 [nginx]
+root     350933 270949  0 18:53 ?        00:00:00 [nginx]
+root     350934 270949  0 18:53 ?        00:00:00 [nginx]
+root     350935 270949  0 18:53 ?        00:00:00 [nginx]
+root     350936 270949  0 18:53 ?        00:00:00 [nginx]
+root     350946 270949  0 18:53 ?        00:00:00 [nginx]
+root     350947 270949  0 18:53 ?        00:00:00 [nginx]
+root     350957 270949  0 18:53 ?        00:00:00 [nginx]
+root     350958 270949  0 18:53 ?        00:00:00 [nginx]
+root     350968 270949  1 18:53 ?        00:00:00 [nginx]
+root     350969 270949  0 18:53 ?        00:00:00 [nginx]
+root     351029 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351030 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351031 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351032 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     351033 270949  2 18:53 ?        00:00:00 nginx: worker process
+root     351034 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351035 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351036 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351037 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351038 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351039 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351040 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351041 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351042 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351043 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351044 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351045 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351046 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351047 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351048 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351049 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351051 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351052 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351053 270949  3 18:53 ?        00:00:00 nginx: worker process
+root     351063 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351071 351063  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:48 [WARNING] 当前有24个前置机nginx进程启动成功
+2021-11-24 18:53:48 [WARNING] 24个前置机nginx进程全部启动成功
+2021-11-24 18:53:48 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:53:48 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      28973      1  0 Nov19 ?        00:40:22 nginx: master process /usr/local/nginx/sbin/nginx
+root     188167  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188168  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188169  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188170  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188171  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188172  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188182  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188192  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188193  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188194  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188195  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188196  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188197  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188198  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188199  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188200  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188201  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188202  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188203  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188204  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188205  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188206  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188207  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188217  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188236  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188237  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188238  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188239  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188240  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188241  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188242  28973  4 18:53 ?        00:00:00 nginx: worker process
+root     188243  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188244  28973  4 18:53 ?        00:00:00 nginx: worker process
+root     188254  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188255 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188263 188255  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:53 [WARNING] 这是后置机nginx进程的第1次等待
+2021-11-24 18:53:53 [WARNING] 检查nginx的worker进程数：
+root      28973      1  0 Nov19 ?        00:40:27 nginx: master process /usr/local/nginx/sbin/nginx
+root     188167  28973  3 18:53 ?        00:00:00 [nginx]
+root     188168  28973  3 18:53 ?        00:00:00 [nginx]
+root     188169  28973  3 18:53 ?        00:00:00 [nginx]
+root     188170  28973  3 18:53 ?        00:00:00 [nginx]
+root     188171  28973  3 18:53 ?        00:00:00 [nginx]
+root     188172  28973  3 18:53 ?        00:00:00 [nginx]
+root     188182  28973  4 18:53 ?        00:00:00 [nginx]
+root     188192  28973  3 18:53 ?        00:00:00 [nginx]
+root     188193  28973  4 18:53 ?        00:00:00 [nginx]
+root     188194  28973  4 18:53 ?        00:00:00 [nginx]
+root     188195  28973  4 18:53 ?        00:00:00 [nginx]
+root     188196  28973  4 18:53 ?        00:00:00 [nginx]
+root     188197  28973  4 18:53 ?        00:00:00 [nginx]
+root     188198  28973  4 18:53 ?        00:00:00 [nginx]
+root     188199  28973  4 18:53 ?        00:00:00 [nginx]
+root     188200  28973  4 18:53 ?        00:00:00 [nginx]
+root     188201  28973  4 18:53 ?        00:00:00 [nginx]
+root     188202  28973  4 18:53 ?        00:00:00 [nginx]
+root     188203  28973  5 18:53 ?        00:00:00 [nginx]
+root     188204  28973  4 18:53 ?        00:00:00 [nginx]
+root     188205  28973  4 18:53 ?        00:00:00 [nginx]
+root     188206  28973  5 18:53 ?        00:00:00 [nginx]
+root     188207  28973  5 18:53 ?        00:00:00 [nginx]
+root     188217  28973  5 18:53 ?        00:00:00 [nginx]
+root     188236  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188237  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188238  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188239  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188240  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188241  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188242  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188243  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188244  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188254  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188264  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188265  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188266  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188267  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188268  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188269  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188270  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188271  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188272  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188273  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188274  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188275  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188276  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188277  28973  5 18:53 ?        00:00:00 nginx: worker process
+root     188278 188075  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188286 188278  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:53 [WARNING] 当前有24个后置机nginx进程启动成功
+2021-11-24 18:53:53 [WARNING] 24个后置机nginx进程全部启动成功
+2021-11-24 18:53:53 [WARNING] 检查代理端口是否监听
+2021-11-24 18:53:53 [WARNING] 查询命令为：netstat -ntlp
+2021-11-24 18:53:54 [WARNING] 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      13553/sshd: /usr/sb 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      14034/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      13527/zabbix_agentd 
+tcp6       0      0 :::22                   :::*                    LISTEN      13553/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      14034/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      13527/zabbix_agentd 
+
+2021-11-24 18:53:54 [WARNING] 预期不包含内容：192.168.30.111:2287
+2021-11-24 18:53:54 [WARNING] 端口监听检查通过
+2021-11-24 18:53:54 [WARNING] 检查代理文件和内容是否正确
+2021-11-24 18:53:54 [WARNING] 查询命令为：cat /etc/jsac/http_proxy/1_65_http.stream
+2021-11-24 18:53:54 [WARNING] 检查内容为：192.168.30.111:2287
+2021-11-24 18:53:54 [WARNING] 代理文件内容为：
+
+2021-11-24 18:53:54 [WARNING] 代理文件检查通过
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] =========================== 设备FrontDutiso_setup_class 结束 耗时：0.3437166213989258s ==================================
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:53:54 [WARNING] =========================== 设备BackDutiso_setup_class 结束 耗时：0.29684972763061523s ==================================
+2021-11-24 18:53:54 [WARNING] Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+2021-11-24 18:53:54 [WARNING] 向Rabbitmq发送信息成功!
+2021-11-24 18:53:54 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222的Rabbitmq信息接收线程已开启!
+2021-11-24 18:53:54 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:53:55 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:40 nginx: master process /usr/local/nginx/sbin/nginx
+root     351029 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351030 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351031 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351032 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351033 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351034 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351035 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351036 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351037 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351038 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351039 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351040 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351041 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351042 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351043 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351044 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351045 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351046 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351047 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351048 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351049 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351051 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351052 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351053 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351142 350807  0 18:53 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351150 351142  0 18:53 ?        00:00:00 grep nginx
+
+2021-11-24 18:53:59 [WARNING] Domain值为: hf.f1203.g01.cs_17.iso222 的Rabbitmq信息接收管道关闭成功!
+2021-11-24 18:54:00 [WARNING] 这是进程的第1次等待
+2021-11-24 18:54:00 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:43 nginx: master process /usr/local/nginx/sbin/nginx
+root     351029 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351030 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351031 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351032 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351033 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351034 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351035 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351036 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351037 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351038 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351039 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351040 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351041 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351042 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351043 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351044 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351045 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351046 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351047 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351048 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351049 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351051 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351052 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351053 270949  0 18:53 ?        00:00:00 nginx: worker process
+root     351158 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351159 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351160 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351161 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351162 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351163 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351164 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351165 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351166 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351167 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351168 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351169 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351170 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351171 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351172 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351173 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351174 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351175 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351176 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351177 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351178 270949  4 18:54 ?        00:00:00 nginx: worker process
+root     351179 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351180 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351181 350807  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351189 351181  0 18:54 ?        00:00:00 grep nginx
+root     351190 270949  0 18:54 ?        00:00:00 nginx: worker process
+
+2021-11-24 18:54:00 [WARNING] 当前有48个进程启动成功
+2021-11-24 18:54:00 [WARNING] 这是进程的第2次等待
+2021-11-24 18:54:00 [WARNING] 检查nginx的worker进程数：
+root      25657      1  0 Nov19 ?        00:00:03 /usr/local/nginx/sbin/ngx-log-trans -n hf.f1203.g01.cs_17.iso222
+root     270949      1  0 Nov23 ?        00:05:43 nginx: master process /usr/local/nginx/sbin/nginx
+root     351029 270949  1 18:53 ?        00:00:00 [nginx]
+root     351030 270949  0 18:53 ?        00:00:00 [nginx]
+root     351031 270949  0 18:53 ?        00:00:00 [nginx]
+root     351032 270949  1 18:53 ?        00:00:00 [nginx]
+root     351033 270949  1 18:53 ?        00:00:00 [nginx]
+root     351034 270949  1 18:53 ?        00:00:00 [nginx]
+root     351035 270949  1 18:53 ?        00:00:00 [nginx]
+root     351036 270949  0 18:53 ?        00:00:00 [nginx]
+root     351037 270949  0 18:53 ?        00:00:00 [nginx]
+root     351038 270949  1 18:53 ?        00:00:00 [nginx]
+root     351039 270949  0 18:53 ?        00:00:00 [nginx]
+root     351040 270949  1 18:53 ?        00:00:00 [nginx]
+root     351041 270949  1 18:53 ?        00:00:00 [nginx]
+root     351042 270949  0 18:53 ?        00:00:00 [nginx]
+root     351043 270949  1 18:53 ?        00:00:00 [nginx]
+root     351044 270949  0 18:53 ?        00:00:00 [nginx]
+root     351045 270949  1 18:53 ?        00:00:00 [nginx]
+root     351046 270949  0 18:53 ?        00:00:00 [nginx]
+root     351047 270949  1 18:53 ?        00:00:00 [nginx]
+root     351048 270949  1 18:53 ?        00:00:00 [nginx]
+root     351049 270949  1 18:53 ?        00:00:00 [nginx]
+root     351051 270949  1 18:53 ?        00:00:00 [nginx]
+root     351052 270949  1 18:53 ?        00:00:00 [nginx]
+root     351053 270949  1 18:53 ?        00:00:00 [nginx]
+root     351158 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351159 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351160 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351161 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351162 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351163 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351164 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351165 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351166 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351167 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351168 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351169 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351170 270949  1 18:53 ?        00:00:00 nginx: worker process
+root     351171 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351172 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351173 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351174 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351175 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351176 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351177 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351178 270949  4 18:54 ?        00:00:00 nginx: worker process
+root     351179 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351180 270949  3 18:54 ?        00:00:00 nginx: worker process
+root     351190 270949  0 18:54 ?        00:00:00 nginx: worker process
+root     351192 350807  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root     351201 351192  0 18:54 ?        00:00:00 grep nginx
+
+2021-11-24 18:54:00 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:54:00 [WARNING] 24个进程全部启动成功
+2021-11-24 18:54:00 [WARNING] 查询命令为：ps -ef |grep nginx
+2021-11-24 18:54:01 [WARNING] 检查当前nginx的worker进程数，第一次获取的结果为：root      28973      1  0 Nov19 ?        00:40:31 nginx: master process /usr/local/nginx/sbin/nginx
+root     188236  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188237  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188238  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188239  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188240  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188241  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188242  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188243  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188244  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188254  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188264  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188265  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188266  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188267  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188268  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188269  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188270  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188271  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188272  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188273  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188274  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188275  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188276  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188277  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188339  28973  1 18:53 ?        00:00:00 nginx: worker process
+root     188340  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188341  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188342  28973  3 18:53 ?        00:00:00 nginx: worker process
+root     188343  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188344  28973  2 18:53 ?        00:00:00 nginx: worker process
+root     188345  28973  4 18:54 ?        00:00:00 nginx: worker process
+root     188346  28973  7 18:54 ?        00:00:00 nginx: worker process
+root     188347  28973  6 18:54 ?        00:00:00 nginx: worker process
+root     188361  28973  0 18:54 ?        00:00:00 nginx: worker process
+root     188362 188075  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188370 188362  0 18:54 ?        00:00:00 grep nginx
+
+2021-11-24 18:54:06 [WARNING] 这是进程的第1次等待
+2021-11-24 18:54:06 [WARNING] 检查nginx的worker进程数：
+root      28973      1  0 Nov19 ?        00:40:36 nginx: master process /usr/local/nginx/sbin/nginx
+root     188236  28973  3 18:53 ?        00:00:00 [nginx]
+root     188237  28973  3 18:53 ?        00:00:00 [nginx]
+root     188238  28973  3 18:53 ?        00:00:00 [nginx]
+root     188239  28973  3 18:53 ?        00:00:00 [nginx]
+root     188240  28973  3 18:53 ?        00:00:00 [nginx]
+root     188241  28973  3 18:53 ?        00:00:00 [nginx]
+root     188242  28973  4 18:53 ?        00:00:00 [nginx]
+root     188243  28973  4 18:53 ?        00:00:00 [nginx]
+root     188244  28973  4 18:53 ?        00:00:00 [nginx]
+root     188254  28973  4 18:53 ?        00:00:00 [nginx]
+root     188264  28973  4 18:53 ?        00:00:00 [nginx]
+root     188265  28973  4 18:53 ?        00:00:00 [nginx]
+root     188266  28973  4 18:53 ?        00:00:00 [nginx]
+root     188267  28973  4 18:53 ?        00:00:00 [nginx]
+root     188268  28973  4 18:53 ?        00:00:00 [nginx]
+root     188269  28973  4 18:53 ?        00:00:00 [nginx]
+root     188270  28973  4 18:53 ?        00:00:00 [nginx]
+root     188271  28973  5 18:53 ?        00:00:00 [nginx]
+root     188272  28973  4 18:53 ?        00:00:00 [nginx]
+root     188273  28973  5 18:53 ?        00:00:00 [nginx]
+root     188274  28973  5 18:53 ?        00:00:00 [nginx]
+root     188275  28973  5 18:53 ?        00:00:00 [nginx]
+root     188276  28973  5 18:53 ?        00:00:00 [nginx]
+root     188277  28973  5 18:53 ?        00:00:00 [nginx]
+root     188339  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188340  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188341  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188342  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188343  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188344  28973  0 18:53 ?        00:00:00 nginx: worker process
+root     188345  28973  0 18:54 ?        00:00:00 nginx: worker process
+root     188346  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188347  28973  0 18:54 ?        00:00:00 nginx: worker process
+root     188361  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188371  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188372  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188373  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188374  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188375  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188376  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188377  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188378  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188379  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188380  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188381  28973  1 18:54 ?        00:00:00 nginx: worker process
+root     188382  28973  2 18:54 ?        00:00:00 nginx: worker process
+root     188383  28973  2 18:54 ?        00:00:00 nginx: worker process
+root     188384  28973  2 18:54 ?        00:00:00 nginx: worker process
+root     188385 188075  0 18:54 ?        00:00:00 bash -c ps -ef |grep nginx
+root     188393 188385  0 18:54 ?        00:00:00 grep nginx
+
+2021-11-24 18:54:06 [WARNING] 当前有24个进程启动成功
+2021-11-24 18:54:06 [WARNING] 24个进程全部启动成功
+2021-11-24 18:54:06 [WARNING] =========================== iso_teardown_met 结束 耗时：11.332782745361328s ==================================
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] =========================== 设备FrontDutiso_setup_class 结束 耗时：0.2812166213989258s ==================================
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] 查询命令为：ps -ef |grep jsac
+2021-11-24 18:54:06 [WARNING] =========================== 设备BackDutiso_setup_class 结束 耗时：0.2654109001159668s ==================================
+2021-11-24 18:54:06 [WARNING] Rabbitmq连接: 10.10.101.233:5672 已断开.
+2021-11-24 18:54:06 [WARNING] Command done, closing SSH connection
+2021-11-24 18:54:06 [WARNING] Command done, closing SSH connection
+2021-11-24 18:54:06 [WARNING] 
+ start----------------------------------------------------------------------------------------------------
+2021-11-24 18:54:06 [WARNING] 
+result: test_iso_http_redirect_a1 -- passed
+2021-11-24 18:54:06 [WARNING] 
+ end----------------------------------------------------------------------------------------------------

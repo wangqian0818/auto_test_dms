@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>测试报告</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (展开详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (隐藏详情)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+/*
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);*/
+function add_collapse() {  // modify by linux超
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">显示详情</a> / ' +
+                            '<a href="javascript:hide_all_extras()">隐藏详情</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+	// 修改用例报告显示的用例名称 add by linux超
+	var case_name_td = document.getElementsByClassName("col-name");
+		for(var i = 0; i < case_name_td.length; i++)
+			try{
+				case_name_td[i].innerText = case_name_td[i].innerText.split("\[")[1].split("\]")[0];
+			}
+			catch(err){
+				// 如果表格中没有[]会抛异常，如果抛异常我就显示null，如果你想显示别的东西自己改吧，因为通常只要我们使用参数化就有[]显示
+				case_name_td[i].innerText = "测试用例无参数化数据null";
+			}
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>[http_check_get]-[10.10.101.47]-[20211124_18-39-02].html</h1>
+    <p>生成报告时间24-Nov-2021 18:40:45 Pytest-Html版本：<a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.22.1.dev11+g4f729c1</p>
+    <h2>测试环境</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.5.0&apos;, &apos;py&apos;: &apos;1.10.0&apos;, &apos;pluggy&apos;: &apos;0.13.1&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.18362-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;allure-pytest&apos;: &apos;2.8.6&apos;, &apos;assume&apos;: &apos;2.4.2&apos;, &apos;base-url&apos;: &apos;1.4.2&apos;, &apos;cov&apos;: &apos;2.10.1&apos;, &apos;forked&apos;: &apos;1.3.0&apos;, &apos;instafail&apos;: &apos;0.4.2&apos;, &apos;metadata&apos;: &apos;1.11.0&apos;, &apos;ordering&apos;: &apos;0.6&apos;, &apos;reportlog&apos;: &apos;0.1.2&apos;, &apos;rerunfailures&apos;: &apos;9.1.1&apos;, &apos;sugar&apos;: &apos;0.9.4&apos;, &apos;xdist&apos;: &apos;2.2.0&apos;, &apos;html&apos;: &apos;1.22.1.dev11+g4f729c1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.6</td></tr>
+      <tr>
+        <td>用例执行时间</td>
+        <td>2021-11-24 18:39:03</td></tr>
+      <tr>
+        <td>设备IP</td>
+        <td>10.10.101.47</td></tr></table>
+    <h2>用例统计</h2>
+    <p>所属部门: 卓讯-合肥测试部</p>
+    <p>测试人员: 王谦</p>
+    <p>【 -------------------------- 网关设备版本号 ----------------------------- 】</p>
+    <p>【 agentjsac-1.1.903-rc.x86_64 】</p>
+    <p>【 driverjsac-1.1.897-rc.x86_64 】</p>
+    <p>【 libhostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 tsthostapi-1.1.897-rc.x86_64 】</p>
+    <p>【 nginx-0.0.472-kernel_rc.x86_64 】</p>
+    <p>执行了2个测试用例, 历时:102.07秒 . </p>
+    <p class="filter" hidden="true">(取消)勾选复选框, 以便筛选测试结果</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">0 通过</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 跳过</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">2 失败</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 错误</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 预期失败</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 预期通过</span>, <input checked="true" class="filter" data-test-result="重跑" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="重跑">0 重跑</span>
+    <h2>测试结果</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">通过/失败</th>
+          <th class="sortable time" col="time">Time</th>
+          <th>Test_nodeId</th>
+          <th class="sortable numeric" col="duration">耗时</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">无测试结果, 试着选择其他测试结果条件</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-time">2021-11-24 10:39:43.098980</td>
+          <td>Case_rbm/http_check_get/function.py::Test_http_check_get::test_http_check_get_a1</td>
+          <td class="col-duration">30.91</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;http_check_get.function.Test_http_check_get object at 0x0000021A6E3ABBE0&gt;<br/><br/>    @allure.feature(&#x27;验证基于GET方法的网页访问策略的过滤&#x27;)<br/>    def test_http_check_get_a1(self):<br/>        # 下发配置<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;addhttp&#x27;), rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res1 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res1 == 1<br/>        # 检查代理策略是否下发成功<br/>        fun.check_proxy_policy()<br/>    <br/>        # 数据检查<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;httpcheck&#x27;, parameter=self.check1_data),<br/>                 rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res2 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res2 == 1<br/>    <br/>        log.warning(&#x27;检查网页应用安全策略是否下发成功&#x27;)<br/>        re = fun.wait_data(type=3, dut=&#x27;gw&#x27;, context=http_ruleid)<br/>        log.warning(&#x27;预期包含内容：{}&#x27;.format(http_ruleid))<br/>        log.warning(&#x27;查询http.json命令返回值：\n{}&#x27;.format(re))<br/>        assert str(http_ruleid) in re<br/>    <br/>        # 发送get请求，不包含黑名单内容的普通请求<br/>        content = http_check.http_get(url)<br/>        log.warning(&#x27;get普通请求的请求内容为：{}&#x27;.format(content))<br/>&gt;       assert content == http_content<br/><span class="error">E       AssertionError</span><br/><br/>Case_rbm\http_check_get\function.py:91: AssertionError<br/>------------------------------ Captured log setup ------------------------------<br/>WARNING  common.ssh:ssh.py:49 ssh 连接开始
+WARNING  common.ssh:ssh.py:55 ssh连接主机：10.10.101.47  完成!
+WARNING  common.ssh:ssh.py:62 ssh服务器: 10.10.101.47连接成功
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;switch-jsac --set --switch on
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;switch-jsac --set --module 12 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;switch-jsac --set --module 13 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;switch-jsac --set --module 15 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;switch-jsac --set --module 16 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf  --action forward
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --selabel on
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --cycle 15
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --ipv4aclcycle 30
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --domain off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --netflow off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --ipv4acl off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --syncookie off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --ckoption off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --noflow off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --droperr off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=0&amp;&amp;defconf --tcpmss 0
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;switch-jsac --set --switch on
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;switch-jsac --set --module 12 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;switch-jsac --set --module 13 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;switch-jsac --set --module 15 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;switch-jsac --set --module 16 --switch off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Set successfully.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf  --action forward
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --selabel on
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --cycle 15
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --ipv4aclcycle 30
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --domain off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --netflow off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --ipv4acl off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --syncookie off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --ckoption off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --noflow off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --droperr off
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:48 clear_env_cmd:export cardid=1&amp;&amp;defconf --tcpmss 0
+WARNING  common.clr_env:clr_env.py:50 clear_env_result:Success.
+
+WARNING  common.clr_env:clr_env.py:52 =========================== clear_env 结束 耗时：2.7806644439697266s ==================================
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep agentjsac
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85349  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85357  85349  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85358  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85366  85358  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.clr_env:clr_env.py:82 =========================== data_check_setup_met 结束 耗时：5.363348722457886s ==================================------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:35 nginx: master process /usr/local/nginx/sbin/nginx
+root      84938  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84939  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84940  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84941  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84942  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84943  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84944  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84945  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84946  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84947  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84948  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84949  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84950  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84951  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84952  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84953  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84954  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84955  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84956  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84957  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84958  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84959  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84960  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      84961  76372  0 18:27 ?        00:00:00 nginx: worker process
+root      85380  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85381  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85384      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85390  85380  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      85394  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85395  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85396  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85397  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85398  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85399  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85400  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85401  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85402  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85403  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85404  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85405  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85406  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85407  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85408  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85409  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85410  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85411  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85412  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85413  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85414  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85415  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85416  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85417  76372  4 18:39 ?        00:00:00 nginx: worker process
+root      85419  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85427  85419  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:2287
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/http_proxy/1_2287_http.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:2287
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-2287-http {
+	server 10.10.100.201:80;
+}
+server {
+	listen 192.168.30.47:2287;
+	app_id 1;
+	server_name localhost;
+
+	location / {
+		proxy_pass http://192.168.30.47-2287-http;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-Port $remote_port;
+	}
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:38 nginx: master process /usr/local/nginx/sbin/nginx
+root      85394  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85395  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85396  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85397  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85398  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85399  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85400  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85401  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85402  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85403  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85404  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85405  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85406  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85407  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85408  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85409  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85410  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85411  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85412  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85413  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85414  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85415  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85416  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85417  76372  4 18:39 ?        00:00:00 nginx: worker process
+root      85455  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85456      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85457  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85465  85457  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:40 nginx: master process /usr/local/nginx/sbin/nginx
+root      85467  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85468  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85469  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85470  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85471  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85472  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85473  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85474  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85475  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85476  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85477  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85478  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85479  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85480  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85481  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85482  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85483  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85484  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85485  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85486  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85487  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85488  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85489  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85490  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85491  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85499  85491  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:82 检查网页应用安全策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/http.json
+WARNING  common.rabbitmq:function.py:84 预期包含内容：100
+WARNING  common.rabbitmq:function.py:85 查询http.json命令返回值：
+[{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pcap&quot;]
+      }]
+  }]
+
+WARNING  data_check.http_check:http_check.py:49 get请求超时
+WARNING  common.rabbitmq:function.py:90 get普通请求的请求内容为：0</div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-time">2021-11-24 10:40:37.701586</td>
+          <td>Case_rbm/http_check_get/function.py::Test_http_check_get::test_http_check_get_a2</td>
+          <td class="col-duration">44.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;http_check_get.function.Test_http_check_get object at 0x0000021A6E455F28&gt;<br/><br/>    @allure.feature(&#x27;验证基于GET方法的多个网页访问策略的过滤&#x27;)<br/>    def test_http_check_get_a2(self):<br/>        # 下发配置<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;addhttp&#x27;), rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res1 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res1 == 1<br/>        # 检查代理策略是否下发成功<br/>        fun.check_proxy_policy()<br/>    <br/>        # 数据检查<br/>        fun.send(rbmExc, tool.interface().use_interface(prototype=&#x27;httpcheck&#x27;, parameter=self.check2_data),<br/>                 rbmDomain, base_path)<br/>        fun.wait_data(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        add_res2 = fun.nginx_worker(&#x27;ps -ef |grep nginx&#x27;, &#x27;gw&#x27;, &#x27;nginx: worker process&#x27;)<br/>        assert add_res2 == 1<br/>        # 检查数据结构检查策略是否下发成功<br/>        log.warning(&#x27;检查网页安全浏览策略是否下发成功&#x27;)<br/>        re = fun.wait_data(type=3, dut=&#x27;gw&#x27;, context=http_ruleid, flag=False)<br/>        log.warning(&#x27;预期包含内容：{}&#x27;.format(http_ruleid))<br/>        log.warning(&#x27;查询http.json命令返回值：\n{}&#x27;.format(re))<br/>        assert str(http_ruleid) in re<br/>    <br/>        # 发送get请求，不包含黑名单内容的普通请求<br/>        content = http_check.http_get(url)<br/>        log.warning(&#x27;多个黑名单时get普通请求的请求内容为：{}&#x27;.format(content))<br/>&gt;       assert content == http_content<br/><span class="error">E       AssertionError</span><br/><br/>Case_rbm\http_check_get\function.py:150: AssertionError<br/>------------------------------ Captured log setup ------------------------------<br/>WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep agentjsac
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85576  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85584  85576  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85585  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85593  85585  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.clr_env:clr_env.py:82 =========================== data_check_setup_met 结束 耗时：5.279397487640381s ==================================------------------------------ Captured log call -------------------------------<br/>WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:42 nginx: master process /usr/local/nginx/sbin/nginx
+root      85534  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85535  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85536  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85537  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85538  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85539  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85540  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85541  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85542  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85543  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85544  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85545  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85546  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85547  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85548  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85549  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85550  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85551  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85552  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85553  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85554  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85555  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85556  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85557  76372  0 18:39 ?        00:00:00 nginx: worker process
+root      85607  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85614  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85616  85607  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:45 nginx: master process /usr/local/nginx/sbin/nginx
+root      85621  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85622  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85623  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85624  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85625  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85626  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85627  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85628  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85629  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85630  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85631  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85632  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85633  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85634  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85635  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85636  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85637  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85638  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85639  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85640  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85641  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85642  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85643  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85644  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85645  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85653  85645  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.fun:fun.py:537 检查代理端口是否监听
+WARNING  common.fun:fun.py:277 查询命令为：netstat -ntlp
+WARNING  common.fun:fun.py:540 监听端口命令返回值：
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 192.168.30.47:2287      0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 0.0.0.0:20022           0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      12457/sshd: /usr/sb 
+tcp        0      0 0.0.0.0:8088            0.0.0.0:*               LISTEN      76372/nginx: master 
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      12923/master        
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      12407/zabbix_agentd 
+tcp6       0      0 :::20022                :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 :::22                   :::*                    LISTEN      12457/sshd: /usr/sb 
+tcp6       0      0 ::1:25                  :::*                    LISTEN      12923/master        
+tcp6       0      0 :::10050                :::*                    LISTEN      12407/zabbix_agentd 
+
+WARNING  common.fun:fun.py:541 预期包含内容：192.168.30.47:2287
+WARNING  common.fun:fun.py:548 端口监听检查通过
+WARNING  common.fun:fun.py:550 检查代理文件和内容是否正确
+WARNING  common.fun:fun.py:552 查询命令为：cat /etc/jsac/http_proxy/1_2287_http.stream
+WARNING  common.fun:fun.py:553 检查内容为：192.168.30.47:2287
+WARNING  common.fun:fun.py:555 代理文件内容为：
+upstream 192.168.30.47-2287-http {
+	server 10.10.100.201:80;
+}
+server {
+	listen 192.168.30.47:2287;
+	app_id 1;
+	server_name localhost;
+
+	location / {
+		proxy_pass http://192.168.30.47-2287-http;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-Port $remote_port;
+	}
+}
+
+WARNING  common.fun:fun.py:560 代理文件检查通过
+WARNING  common.rabbitmq:rabbitmq.py:302 Rabbitmq服务器连接: 10.10.101.233:5672 成功.
+WARNING  common.rabbitmq:rabbitmq.py:324 向Rabbitmq发送信息成功!
+WARNING  common.rabbitmq:rabbitmq.py:339 Domain值为: hf.f1203.g01.cs_17.wg47的Rabbitmq信息接收线程已开启!
+WARNING  common.fun:fun.py:277 查询命令为：ps -ef |grep nginx
+WARNING  common.fun:fun.py:318 检查当前nginx的worker进程数，第一次获取的结果为：root      76372      1  2 16:38 ?        00:02:45 nginx: master process /usr/local/nginx/sbin/nginx
+root      85621  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85622  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85623  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85624  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85625  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85626  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85627  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85628  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85629  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85630  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85631  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85632  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85633  76372  1 18:39 ?        00:00:00 nginx: worker process
+root      85634  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85635  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85636  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85637  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85638  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85639  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85640  76372  3 18:39 ?        00:00:00 nginx: worker process
+root      85641  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85642  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85643  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85644  76372  2 18:39 ?        00:00:00 nginx: worker process
+root      85681  79970  0 18:39 ?        00:00:00 systemctl reload nginx_kernel
+root      85682      1  0 18:39 ?        00:00:00 /usr/local/nginx/sbin/nginx -s reload
+root      85683  85066  0 18:39 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85691  85683  0 18:39 ?        00:00:00 grep nginx
+
+WARNING  common.rabbitmq:rabbitmq.py:423 Domain值为: hf.f1203.g01.cs_17.wg47 的Rabbitmq信息接收管道关闭成功!
+WARNING  common.fun:fun.py:328 这是进程的第1次等待
+WARNING  common.fun:fun.py:330 检查nginx的worker进程数：
+root      76372      1  2 16:38 ?        00:02:47 nginx: master process /usr/local/nginx/sbin/nginx
+root      85702  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85703  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85704  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85705  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85706  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85707  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85708  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85709  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85710  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85711  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85712  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85713  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85714  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85715  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85716  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85717  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85718  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85719  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85720  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85721  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85722  76372  0 18:40 ?        00:00:00 nginx: worker process
+root      85723  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85724  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85725  76372  1 18:40 ?        00:00:00 nginx: worker process
+root      85726  85066  0 18:40 ?        00:00:00 bash -c ps -ef |grep nginx
+root      85734  85726  0 18:40 ?        00:00:00 grep nginx
+
+WARNING  common.fun:fun.py:338 当前有24个进程启动成功
+WARNING  common.fun:fun.py:340 24个进程全部启动成功
+WARNING  common.rabbitmq:function.py:141 检查网页安全浏览策略是否下发成功
+WARNING  common.fun:fun.py:277 查询命令为：cat /etc/jsac/http.json
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第1次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第2次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第3次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第4次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第5次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第6次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第7次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第8次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第9次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第10次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第11次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第12次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第13次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第14次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第15次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第16次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第17次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第18次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第19次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第20次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第21次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第22次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第23次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第24次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第25次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第26次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第27次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第28次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第29次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第30次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第31次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第32次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第33次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第34次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第35次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第36次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第37次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第38次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第39次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第40次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第41次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第42次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第43次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第44次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第45次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第46次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第47次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第48次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第49次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第50次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第51次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第52次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第53次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第54次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第55次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第56次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第57次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第58次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第59次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第60次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第61次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第62次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第63次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第64次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第65次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第66次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第67次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第68次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第69次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第70次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第71次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第72次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第73次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第74次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第75次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第76次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第77次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第78次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第79次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第80次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第81次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第82次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第83次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第84次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第85次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第86次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第87次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第88次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第89次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第90次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第91次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第92次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第93次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第94次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第95次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第96次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第97次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第98次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第99次等待
+WARNING  common.fun:fun.py:299 [{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  common.fun:fun.py:302 这是进程的第100次等待
+WARNING  common.fun:fun.py:305 进程检查结果失败
+WARNING  common.rabbitmq:function.py:143 预期包含内容：100
+WARNING  common.rabbitmq:function.py:144 查询http.json命令返回值：
+[{
+    &quot;AppId&quot;:  1,
+    &quot;AppRules&quot;:  [{
+        &quot;RuleId&quot;:  100,
+        &quot;Action&quot;:  &quot;Deny&quot;,
+        &quot;Method&quot;:  [&quot;GET&quot;],
+        &quot;Parameter&quot;:  [&quot;pdf&quot;, &quot;js&quot;]
+      }]
+  }]
+
+WARNING  data_check.http_check:http_check.py:49 get请求超时
+WARNING  common.rabbitmq:function.py:149 多个黑名单时get普通请求的请求内容为：0</div></td></tr></tbody></table></body></html>
