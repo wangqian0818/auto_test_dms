@@ -137,9 +137,9 @@ class Test_iso_tcp_keyword():
 
         # 发送get请求，验证正常请求是否成功
         log.warning('请求地址为{}'.format(http_url))
-        content = http_check.http_get(http_url)
-        log.warning('get请求返回的内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url)
+        log.warning('get请求返回的内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         time.sleep(10)
         # 发送post请求，包含关键字过滤为post的请求应该被禁止
@@ -212,7 +212,7 @@ class Test_iso_tcp_keyword():
         content = con_ftp.show_file_content(self.case2_downlocalPath)
         log.warning('被下载文件包含关键字内容{}，所以预期内容为[]'.format(self.ftp_keyword1))
         log.warning('查询下载的文件{} 内容为：{}'.format(self.case2_downlocalPath, content))
-        assert content == []
+        assert status_code == []
 
         result = con_ftp.uploadFile(fp, self.case2_upremotePath, self.case2_uplocalPath)
         log.warning('上传命令被禁止的ftp传输策略，上传文件的结果为:{}'.format(result))

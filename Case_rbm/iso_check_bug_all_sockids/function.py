@@ -95,9 +95,9 @@ class Test_iso_http_basic():
             # # 发送get请求，验证隔离下的http策略
             # url = 'http://' + proxy
             # log.warning('请求地址为{}'.format(url))
-            # content = http_check.http_get(url)
-            # log.warning('验证隔离下的http策略请求内容为：{}'.format(content))
-            # assert content == http_content
+            # status_code = http_check.http_get(url, flag=1)
+            # log.warning('验证隔离下的http策略请求内容为：{}'.format(status_code))
+            # assert status_code == 200
 
             # 移除策略，清空环境
             # time.sleep(3)

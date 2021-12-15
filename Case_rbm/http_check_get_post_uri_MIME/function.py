@@ -98,14 +98,14 @@ class Test_http_check_get_post_uri_MIME():
         assert str(self.ruleid) in re
 
         # 1、发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('1、get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('1、get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 2、发送post请求，不包含黑名单内容的普通请求
-        content = http_check.http_post(url)
-        log.warning('2、post普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(url)
+        log.warning('2、post普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 3、发送get请求，请求内容包含第一个黑名单
         status_code1 = http_check.http_get(self.case1_url1, flag=1)
@@ -128,13 +128,13 @@ class Test_http_check_get_post_uri_MIME():
         assert status_code4 == 405
 
         # 7、发送get请求，请求内容包含第一个uri黑名单_第一个MIME白名单
-        content = http_check.http_get(self.case1_url5, flag=1)
-        log.warning('7、get请求内容包含第一个uri黑名单_第一个MIME白名单的请求内容为：{}'.format(content))
+        status_code = http_check.http_get(self.case1_url5, flag=1)
+        log.warning('7、get请求内容包含第一个uri黑名单_第一个MIME白名单的请求内容为：{}'.format(status_code))
         assert content != 405
 
         # 8、发送get请求，请求内容包含第一个uri黑名单_第二个MIME白名单
-        content = http_check.http_get(self.case1_url6, flag=1)
-        log.warning('8、get请求内容包含第一个uri黑名单_第二个MIME白名单的请求内容为：{}'.format(content))
+        status_code = http_check.http_get(self.case1_url6, flag=1)
+        log.warning('8、get请求内容包含第一个uri黑名单_第二个MIME白名单的请求内容为：{}'.format(status_code))
         assert content != 405
 
         # 9、发送get请求，请求内容包含第二个uri黑名单_第一个MIME白名单
@@ -158,14 +158,14 @@ class Test_http_check_get_post_uri_MIME():
         assert status_code8 == 405
 
         # 13、发送post请求，请求内容包含第三个黑名单
-        content = http_check.http_post(self.case1_url3, flag=1)
-        log.warning('13、post请求内容包含第三个黑名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_post(self.case1_url3, flag=1)
+        log.warning('13、post请求内容包含第三个黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 14、发送post请求，请求内容包含第四个黑名单
-        content = http_check.http_post(self.case1_url4, flag=1)
-        log.warning('14、post请求内容包含第四个黑名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_post(self.case1_url4, flag=1)
+        log.warning('14、post请求内容包含第四个黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 15、发送post请求，请求内容包含第一个uri黑名单_第一个MIME白名单
         status_code9 = http_check.http_post(self.case1_url5, flag=1)
@@ -236,14 +236,14 @@ class Test_http_check_get_post_uri_MIME():
         assert str(http_ruleid) in re
 
         # 1、发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('1、get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('1、get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 2、发送post请求，不包含黑名单内容的普通请求
-        content = http_check.http_post(url)
-        log.warning('2、post普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(url)
+        log.warning('2、post普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 3、发送get请求，请求内容包含第一个黑名单
         status_code1 = http_check.http_get(self.case1_url1, flag=1)
@@ -266,14 +266,14 @@ class Test_http_check_get_post_uri_MIME():
         assert status_code4 == 405
 
         # 7、发送get请求，请求内容包含第一个uri黑名单_第一个MIME黑名单
-        content = http_check.http_get(self.case1_url5, flag=1)
-        log.warning('7、get请求内容包含第一个uri黑名单_第一个MIME白名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_get(self.case1_url5, flag=1)
+        log.warning('7、get请求内容包含第一个uri黑名单_第一个MIME白名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 8、发送get请求，请求内容包含第一个uri黑名单_第二个MIME黑名单
-        content = http_check.http_get(self.case1_url6, flag=1)
-        log.warning('8、get请求内容包含第一个uri黑名单_第二个MIME白名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_get(self.case1_url6, flag=1)
+        log.warning('8、get请求内容包含第一个uri黑名单_第二个MIME白名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 9、发送get请求，请求内容包含第二个uri黑名单_第一个MIME黑名单
         status_code5 = http_check.http_get(self.case1_url7, flag=1)
@@ -296,14 +296,14 @@ class Test_http_check_get_post_uri_MIME():
         assert status_code8 == 405
 
         # 13、发送post请求，请求内容包含第三个黑名单
-        content = http_check.http_post(self.case1_url3, flag=1)
-        log.warning('13、post请求内容包含第三个黑名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_post(self.case1_url3, flag=1)
+        log.warning('13、post请求内容包含第三个黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 14、发送post请求，请求内容包含第四个黑名单
-        content = http_check.http_post(self.case1_url4, flag=1)
-        log.warning('14、post请求内容包含第四个黑名单的请求内容为：{}'.format(content))
-        assert content == 405
+        status_code = http_check.http_post(self.case1_url4, flag=1)
+        log.warning('14、post请求内容包含第四个黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == 405
 
         # 15、发送post请求，请求内容包含第一个uri黑名单_第一个MIME白名单
         status_code9 = http_check.http_post(self.case1_url5, flag=1)

@@ -144,9 +144,9 @@ class Test_iso_http_check_post():
         assert str(http_ruleid) in re
 
         # 发送post请求，不包含黑名单内容的普通请求
-        content = http_check.http_post(url)
+        status_code = http_check.http_post(url)
         log.warning('post普通请求的请求【{}】内容为：{}'.format(url,content))
-        assert content == http_content
+        assert status_code == http_content
 
         # 发送post请求，请求内容不包含黑名单内容
         status = http_check.http_post(self.check_url, flag=1)
@@ -211,9 +211,9 @@ class Test_iso_http_check_post():
         assert str(http_ruleid) in re
 
         # 发送post请求，不包含黑名单内容的普通请求
-        content = http_check.http_post(url)
-        log.warning('多个黑名单时post普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(url)
+        log.warning('多个黑名单时post普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 发送post请求，请求内容不包含黑名单内容
         status_code = http_check.http_post(self.check_url, flag=1)

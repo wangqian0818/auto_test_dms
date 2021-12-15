@@ -83,8 +83,9 @@ class Test_iso_http_large_file():
 
         # 发送get请求，验证get请求是否正常
         log.warning('请求地址为{}'.format(http_url))
-        content = http_check.http_get(http_url)
-        log.warning('验证隔离下的get请求内容为：{}'.format(content))
+        status_code = http_check.http_get(http_url, flag=1)
+        log.warning('验证隔离下的get请求内容为：{}'.format(status_code))
+        assert content==200
 
         # 发送get请求，验证隔离下的http策略下载一个100M大小的文件
         log.warning('下载的服务器地址为{}'.format(self.downfile_url))
@@ -132,8 +133,8 @@ class Test_iso_http_large_file():
 
         # 发送post请求，验证post请求是否正常
         log.warning('请求地址为{}'.format(self.up_url))
-        content = http_check.http_post(self.up_url)
-        log.warning('post普通请求的请求内容为：{}'.format(content))
+        status_code = http_check.http_post(self.up_url)
+        log.warning('post普通请求的请求内容为：{}'.format(status_code))
 
         # 发送post请求，验证隔离下的http策略上传一个100M大小的文件
         log.warning('上传的服务器地址为{}'.format(self.upfile_url))

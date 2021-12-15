@@ -86,9 +86,9 @@ class Test_http_check_get():
         assert str(http_ruleid) in re
 
         # 发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 发送get请求，请求内容不包含黑名单内容
         status = http_check.http_get(self.case_data, flag=1)
@@ -96,7 +96,7 @@ class Test_http_check_get():
         assert status == 200
 
         # 发送get请求，请求内容包含黑名单
-        status_code = http_check.http_get(self.case1_data)
+        status_code = http_check.http_get(self.case1_data, flag=1)
         log.warning('get请求内容包含黑名单返回的状态码为：{}'.format(status_code))
         assert status_code == 405
 
@@ -145,9 +145,9 @@ class Test_http_check_get():
         assert str(http_ruleid) in re
 
         # 发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('多个黑名单时get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('多个黑名单时get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 发送get请求，请求内容不包含黑名单内容
         status = http_check.http_get(self.case_data, flag=1)

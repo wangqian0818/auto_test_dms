@@ -200,9 +200,9 @@ class Test_iso_http_check_MIME_deny():
 
         # 发送get请求，不指定内容的普通请求
         log.warning('3、控制台发送get请求，不包含请求内容;请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 发送get请求，请求内容不包含MIME黑名单
         log.warning('4、控制台发送get请求，请求内容不包含MIME黑名单；请求成功，状态码返回为200')
@@ -281,9 +281,9 @@ class Test_iso_http_check_MIME_deny():
 
         # 发送get请求，不指定内容的普通请求
         log.warning('3、控制台发送get请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 发送get请求，请求内容不包含MIME黑名单
         log.warning('4、控制台发送get请求，请求内容不包含MIME黑名单；请求成功，状态码返回为200')
@@ -397,9 +397,9 @@ class Test_iso_http_check_MIME_deny():
 
         # 发送get请求，不指定内容的普通请求
         log.warning('3、控制台发送get请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 发送get请求，请求内容包含MIME黑名单
         log.warning('4、控制台发送get请求，请求内容包含MIME黑名单：doc；请求失败，状态码返回为403')

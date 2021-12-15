@@ -89,9 +89,9 @@ class Test_agent():
         assert http_proxy_ip in re1
 
         # 发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 移除策略，还原环境
         fun.send(rbmExc, tool.interface().setAccessconf(prototype='delhttp'), rbmDomain, base_path)

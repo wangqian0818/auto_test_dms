@@ -94,9 +94,9 @@ class Test_http_check_MIME_deny():
         assert self.check1_uri in re
 
         # # 发送get请求，不指定内容的普通请求
-        # content = http_check.http_get(url)
-        # log.warning('get普通请求的请求内容为：{}'.format(content))
-        # assert content == http_content
+        # status_code = http_check.http_get(url, flag=1)
+        # log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        # assert status_code == 200
         #
         # # 发送get请求，请求内容不包含MIME黑名单
         # status_code = http_check.http_get(self.base_uri, self.data, flag=1)
@@ -154,9 +154,9 @@ class Test_http_check_MIME_deny():
             assert mime in re
 
         # 发送get请求，不指定内容的普通请求
-        content = http_check.http_get(url)
-        log.warning('get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(url, flag=1)
+        log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 发送get请求，请求内容不包含MIME黑名单
         status_code = http_check.http_get(self.base_uri, self.data, flag=1)
@@ -236,9 +236,9 @@ class Test_http_check_MIME_deny():
             assert mime in re
         #
         # # 发送get请求，不指定内容的普通请求
-        # content = http_check.http_get(url)
-        # log.warning('get普通请求的请求内容为：{}'.format(content))
-        # assert content == http_content
+        # status_code = http_check.http_get(url, flag=1)
+        # log.warning('get普通请求的请求内容为：{}'.format(status_code))
+        # assert status_code == 200
         #
         # # 发送get请求，请求内容包含MIME黑名单
         # status_code = http_check.http_get(self.base_uri, self.data, flag=1)

@@ -85,14 +85,14 @@ class Test_http_check_get_post_uri():
 
         time.sleep(3)
         # 1、发送get请求，不包含黑名单内容的普通请求
-        content = http_check.http_get(url)
+        status_code = http_check.http_get(url, flag=1)
         log.warning('get普通请求【{}】的请求内容为：{}'.format(url, content))
-        assert content == http_content
+        assert status_code == 200
 
         # 2、发送post请求，不包含黑名单内容的普通请求
-        content = http_check.http_post(url)
+        status_code = http_check.http_post(url)
         log.warning('post普通请求【{}】的请求内容为：{}'.format(url, content))
-        assert content == http_content
+        assert status_code == http_content
 
         # 3、发送get请求，请求内容包含第一个get黑名单
         status_code = http_check.http_get(self.check_url1, flag=1)

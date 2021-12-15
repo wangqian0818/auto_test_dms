@@ -232,15 +232,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 1、发送get请求，不包含黑名单内容的普通请求
         log.warning('3、控制台发送get请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url)
-        log.warning('1、get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url, flag=1)
+        log.warning('1、get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == 200
 
         # 2、发送post请求，不包含黑名单内容的普通请求
         log.warning('4、控制台发送post请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url)
-        log.warning('2、post普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url)
+        log.warning('2、post普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 3、发送get请求，请求内容包含第一个get黑名单
         log.warning('控制台发送get请求，请求内容包含get黑名单hello；请求失败，状态码返回为403')
@@ -268,15 +268,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 7、发送get请求，请求内容包含第一个post黑名单
         log.warning('9、控制台发送get请求，请求内容包含post黑名单123；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url, self.case1_post_data1)
-        log.warning('7、get请求内容包含第一个post黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url, self.case1_post_data1, flag=1)
+        log.warning('7、get请求内容包含第一个post黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 8、发送get请求，请求内容包含第二个post黑名单
         log.warning('10、控制台发送get请求，请求内容包含post黑名单456；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url, self.case1_post_data2)
-        log.warning('8、get请求内容包含第二个post黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url, self.case1_post_data2, flag=1)
+        log.warning('8、get请求内容包含第二个post黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 9、发送post请求，请求内容包含第一个post黑名单
         log.warning('11、控制台发送post请求，请求内容包含post黑名单123；请求失败，状态码返回为403')
@@ -304,15 +304,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 13、发送post请求，请求内容包含第一个get黑名单
         log.warning('15、控制台发送post请求，请求内容包含get黑名单hello；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url, self.case1_get_data1)
-        log.warning('13、post请求内容包含第一个get黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url, self.case1_get_data1)
+        log.warning('13、post请求内容包含第一个get黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 14、发送post请求，请求内容包含第二个get黑名单
         log.warning('16、控制台发送post请求，请求内容包含get黑名单juson；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url, self.case1_get_data2)
-        log.warning('14、post请求内容包含第二个get黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url, self.case1_get_data2)
+        log.warning('14、post请求内容包含第二个get黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 15、发送get请求，请求内容包含第一个MIME白名单
         log.warning('17、控制台发送get请求，请求内容包含MIME白名单css；请求成功，状态码返回为200')
@@ -409,15 +409,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 1、发送get请求，不包含黑名单内容的普通请求
         log.warning('3、控制台发送get请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url)
-        log.warning('1、get普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url)
+        log.warning('1、get普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 2、发送post请求，不包含黑名单内容的普通请求
         log.warning('4、控制台发送post请求，不包含请求内容；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url)
-        log.warning('2、post普通请求的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url)
+        log.warning('2、post普通请求的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 3、发送get请求，请求内容包含第一个get黑名单
         log.warning('5、控制台发送get请求，请求内容包含get黑名单hello；请求失败，状态码返回为403')
@@ -445,15 +445,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 7、发送get请求，请求内容包含第一个post黑名单
         log.warning('9、控制台发送get请求，请求内容包含post黑名单123；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url, self.case1_post_data1)
-        log.warning('7、get请求内容包含第一个post黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url, self.case1_post_data1)
+        log.warning('7、get请求内容包含第一个post黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 8、发送get请求，请求内容包含第二个post黑名单
         log.warning('10、控制台发送get请求，请求内容包含post黑名单456；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_get(http_url, self.case1_post_data2)
-        log.warning('8、get请求内容包含第二个post黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_get(http_url, self.case1_post_data2)
+        log.warning('8、get请求内容包含第二个post黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 9、发送post请求，请求内容包含第一个post黑名单
         log.warning('11、控制台发送post请求，请求内容包含post黑名单123；请求失败，状态码返回为403')
@@ -481,15 +481,15 @@ class Test_iso_http_check_get_post_uri_MIME():
 
         # 13、发送post请求，请求内容包含第一个get黑名单
         log.warning('15、控制台发送post请求，请求内容包含get黑名单hello；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url, self.case1_get_data1)
-        log.warning('13、post请求内容包含第一个get黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url, self.case1_get_data1)
+        log.warning('13、post请求内容包含第一个get黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 14、发送post请求，请求内容包含第二个get黑名单
         log.warning('16、控制台发送post请求，请求内容包含get黑名单juson；请求成功，请求到的内容为server的index.html文件内包含的内容')
-        content = http_check.http_post(http_url, self.case1_get_data2)
-        log.warning('14、post请求内容包含第二个get黑名单的请求内容为：{}'.format(content))
-        assert content == http_content
+        status_code = http_check.http_post(http_url, self.case1_get_data2)
+        log.warning('14、post请求内容包含第二个get黑名单的请求内容为：{}'.format(status_code))
+        assert status_code == http_content
 
         # 15、发送get请求，请求内容包含第一个MIME黑名单
         log.warning('17、控制台发送get请求，请求内容包含MIME黑名单css；请求失败，状态码返回为403')
